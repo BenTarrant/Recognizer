@@ -8,19 +8,26 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 5.0f; // public reference to movement speed
     public float mouseSensitivity = 5.0f;// public reference for mouse sensitivity
 
-    public GameObject BulletPrefab;
-    public Transform BulletStart;
-    public float BulletSpeed = 5.0f;
+    //Shooting references
+    public Camera FPScamera; //Reference to the camera attached to the player for raycasting
+    public float range = 100f; // range reference for how far the ray should be cast - public so different weapons can have different range
+    public GameObject ImpactEffect; // reference for the impact effect particle system
 
-    //CursorLockMode wantedMode;
+    //Access EnemyController
+    public EnemyController Enemy; // reference to the Enemy Controller script, specified in IDE
+
+    //Weapon Switching
+    public GameObject[] weapons;
+    public int currentWeapon;
 
     void Start()
     {
         // Apply requested cursor state
         SetCursorState();
+        changeWeapon(1);
     }
 
-    
+
     void SetCursorState()
     {
         Cursor.lockState = CursorLockMode.Locked; // Stops cursor moving during play
@@ -31,9 +38,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        
+
         //Camera Roatation
-        float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity; 
+        float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity;
         transform.Rotate(0, rotLeftRight, 0);
         // causes mouse to move horizontal roatation based on mouse sensitivty float
         //Could eventually be incorporated into a UI slider so player can edit
@@ -50,24 +57,55 @@ public class PlayerController : MonoBehaviour
         //Player Shooting
         if (Input.GetMouseButtonDown(0)) // if the left mouse button is clicked
         {
-            var bullet = (GameObject)Instantiate(BulletPrefab, BulletStart.position, Quaternion.identity); // instatiate the bulletprefab set in IDE
-            bullet.GetComponent<Rigidbody>().velocity = transform.forward * BulletSpeed; // give it the velocity Bullet Speed defined in IDE
-            Destroy(bullet, 2.0f); // destroy game object after X seconds
-
-            //GameObject.Instantiate(digitalExplosion, transform.position, transform.rotation);
-            //Potentially used when an explosion prefab is designed - Deresolution.
-
+            Shoot(); // run shoot method
         }
 
 
 
         //Player Change Weapons
 
-        if (Input.GetMouseButtonDown(1)) // when the right mouse button is clicked
-            Debug.Log("Pressed right click");
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // when the right mouse button is clicked
+        {
+            changeWeapon(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) // when the right mouse button is clicked
+        {
+            changeWeapon(2);
+        }
+
 
 
 
     }
 
+    void Shoot() // shoot method
+    {
+        RaycastHit hit;//fire a raycast
+        if (Physics.Raycast(FPScamera.transform.position, FPScamera.transform.forward, out hit, range))//if the raycast hits something within range
+        {
+            Debug.Log(hit.transform.name); // print the name of collider the ray has hit
+            Instantiate(ImpactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // instantiate attached impact particle effect with correct rotation based on normals of collider
+
+            if (hit.transform.gameObject.tag == "Enemy") // if the raycast hits an object tagged enemy
+            {
+                Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy
+            }
+        }
+
+    }
+
+    public void changeWeapon(int num)
+    {
+        currentWeapon = num;
+        for (int i = 1; i < weapons.Length; i++)
+        {
+            if (i == num)
+                weapons[i].gameObject.SetActive(true);
+            else
+                weapons[i].gameObject.SetActive(false);
+        }
+
+
+    }
 }

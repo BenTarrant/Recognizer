@@ -612,7 +612,8 @@ Prefab:
       propertyPath: MaxChaseDist
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114264736146250854, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &351904587
@@ -1229,7 +1230,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1241,6 +1242,11 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!143 &977410374 stripped
+CharacterController:
+  m_PrefabParentObject: {fileID: 143458315997740582, guid: 865dda4a66a976649aebdbe140f6e558,
+    type: 2}
+  m_PrefabInternal: {fileID: 330640291}
 --- !u!114 &977410377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,6 +1260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 977410371}
   target: {fileID: 1896859647}
+  CC_NPC: {fileID: 977410374}
 --- !u!1 &1122964777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,7 +1834,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 355788790
+  randomSeed: 1558707128
   InitialModule:
     serializedVersion: 3
     enabled: 1
