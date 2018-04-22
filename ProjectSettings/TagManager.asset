@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TEST
   - Bullet
   - Derezzed
+  - Enemy
+  - TEST
+  - Pickup
   layers:
   - Default
   - TransparentFX
