@@ -10,15 +10,21 @@ public class MuzzleFlash : MonoBehaviour {
     void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-        if (Input.GetMouseButtonDown(0)) // if the left mouse button is clicked
+
+    void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
         {
             muzzleFlash.Play();
         }
-
         
     }
+
+
+    //public void Flash()
+    //   {
+    //      muzzleFlash.Play();
+
+    //   }
 }

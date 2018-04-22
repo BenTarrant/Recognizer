@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public Camera FPScamera; //Reference to the camera attached to the player for raycasting
     public float range = 100f; // range reference for how far the ray should be cast - public so different weapons can have different range
     public GameObject ImpactEffect; // reference for the impact effect particle system
+    private float fl_delay;
+    public float fl_cool_down = 1;
+    //public MuzzleFlash flash;
 
     //Access EnemyController
     public EnemyController Enemy; // reference to the Enemy Controller script, specified in IDE
@@ -55,9 +58,14 @@ public class PlayerController : MonoBehaviour
         cc.SimpleMove(speed); // uses the defined direction and defined speed to move the character controller attached to player
 
         //Player Shooting
-        if (Input.GetMouseButtonDown(0)) // if the left mouse button is clicked
+        if (Input.GetMouseButtonDown(0) && Time.time > fl_delay) // if the left mouse button is clicked
         {
-            Shoot(); // run shoot method
+
+           Shoot(); // run shoot method
+           fl_delay = Time.time + fl_cool_down;
+
+            //CURRENTLY REQUIRES DIFFERENT MUZZLE FLASH AND COOLDOWNS FOR EACH WEAPON - NEED TO CALL FLASH() FUNCTION IN MUZZLEFLASH SCRIPT SOMEHOW
+
         }
 
 
@@ -67,11 +75,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) // when the right mouse button is clicked
         {
             changeWeapon(1);
+            range = 30.0f;
+            fl_cool_down = 1.0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) // when the right mouse button is clicked
         {
             changeWeapon(2);
+            range = 50.0f;
+            fl_cool_down = 0.1f;
         }
 
 
@@ -89,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "Enemy") // if the raycast hits an object tagged enemy
             {
-                Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy
+                Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy CURRENTLY ONLY WORKS WITH ONE ENEMY DUE TO ATTACH METHOD
             }
         }
 
@@ -107,5 +119,27 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    //pickup functionality
+    void OnTriggerEnter(Collider collision)
+    {
+
+        if (collision.gameObject.tag == "Pickup") // check to see if the item collided with is designated as a pickup
+        {
+        //then ren through to check what type of pick up it is
+
+            if (collision.gameObject.name == "Pickup_Weapon_Rifle") // if it's the Rifle pickup
+            {
+                Destroy(collision.gameObject); // destroy the pickup
+                changeWeapon(2); // switch to the Rifle weapon (2 in array)
+            }
+
+            if (collision.gameObject.name == "Pickup_Weapon_Pistol") // if it's the Pistol pickup
+            {
+                Destroy(collision.gameObject); // destroy the pickup
+                changeWeapon(1); // Switch to the Pistol 
+            }
+        }
     }
 }
