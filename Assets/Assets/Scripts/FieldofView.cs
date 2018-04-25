@@ -25,6 +25,9 @@ public class FieldofView : MonoBehaviour
     public MeshFilter viewMeshFilter;
     public Mesh viewMesh;
 
+    public EnemyController enemyMove;
+
+
     private void Awake()
     {
         viewMesh = new Mesh();
@@ -54,6 +57,7 @@ public class FieldofView : MonoBehaviour
 
     void FindVisibleTargets()
     {
+        enemyMove.EnemyMove();
         visibleTargets.Clear();
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -68,6 +72,7 @@ public class FieldofView : MonoBehaviour
                 {
                     visibleTargets.Add(target);
                     Debug.Log("TargetAdded"); // place attack/detect player reference here
+                    
                 }
             }
         }
