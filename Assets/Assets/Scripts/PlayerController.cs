@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "Enemy") // if the raycast hits an object tagged enemy
             {
-                Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy CURRENTLY ONLY WORKS WITH ONE ENEMY DUE TO ATTACH METHOD
+                Enemy = hit.transform.gameObject.GetComponent<EnemyController>();
+                Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy
                 
             }
         }
