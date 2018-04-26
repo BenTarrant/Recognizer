@@ -58,6 +58,8 @@ public class FieldofView : MonoBehaviour
     void FindVisibleTargets()
     {
         enemyMove.EnemyMove();
+        enemyMove.Recognized = false;
+
         visibleTargets.Clear();
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -72,7 +74,7 @@ public class FieldofView : MonoBehaviour
                 {
                     visibleTargets.Add(target);
                     Debug.Log("TargetAdded"); // place attack/detect player reference here
-                    
+                    enemyMove.Recognized = true;
                 }
             }
         }

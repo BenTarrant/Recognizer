@@ -15,7 +15,6 @@ public class EnemyController : MonoBehaviour {
     //Patrolling
     public GameObject[] Waypoints;
     private int in_next_wp = 0;
-    //public AudioClip IdentifiedClip;
 
     //Health and Deresolution
     public GameObject Deresolution; // sets a reference for the game object to be instatiated in the IDE
@@ -31,48 +30,30 @@ public class EnemyController : MonoBehaviour {
         Enemy_Animate = GetComponent<Animator>();
         Enemy_Animate.SetBool("bl_walking", false);
         Recognized = false;
-        //GetComponent<AudioSource>().clip = IdentifiedClip;
 
     }
 
-    // Update is called once per frame
-    //void Update () {
 
-    //       if (Vector3.Distance(target.position, this.transform.position) < 22)
-    //       {
+    void Update()
+    {
 
-    //           agent.SetDestination(target.transform.position);
-    //           Enemy_Animate.SetBool("bl_walking", true);
-    //           agent.isStopped = false;
-    //           //GetComponent<AudioSource>().Play();
-
-    //           if (Vector3.Distance(target.position, this.transform.position) < 8)
-    //           {
-    //               Debug.Log("AttackPlayer"); // attack the player function to go here
-    //               Enemy_Animate.SetBool("bl_walking", false); // can set attack animation to true when implemented
-    //               agent.isStopped = true; // makes the agent pause its process
-    //           }
-
-    //           //if //line of sight script to go here
-    //           {
-
-    //           }
-    //       }
-
-    //       else
-    //       {
-    //           Patrol();
-    //       }
-
-    //   }
+    }
 
     public void EnemyMove()
     {
+
         if (Recognized == true)
         {
             agent.SetDestination(target.transform.position);
             Enemy_Animate.SetBool("bl_walking", true);
             agent.isStopped = false;
+
+            if (Vector3.Distance(target.position, this.transform.position) < 8)
+            {
+                Debug.Log("AttackPlayer"); // attack the player function to go here
+                Enemy_Animate.SetBool("bl_walking", false); // can set attack animation to true when implemented
+                agent.isStopped = true; // makes the agent pause its process
+            }
         }
 
 
