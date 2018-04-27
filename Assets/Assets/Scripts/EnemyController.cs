@@ -87,10 +87,9 @@ public class EnemyController : MonoBehaviour {
 
     public void HitByRay()
     {
-        Debug.Log("I was hit by a Ray");
         Health -= 1;
 
-       if (Health == 0)
+        if (Health == 0)
        {
           Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
           Destroy(gameObject); //destroy the object this is attached to
