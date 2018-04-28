@@ -25,7 +25,7 @@ public class FieldofView : MonoBehaviour
     public MeshFilter viewMeshFilter;
     public Mesh viewMesh;
 
-    public EnemyController enemyMove;
+    public EnemyController enemyMove; //allows a public reference to the EnemyController script functions
 
 
     private void Awake()
@@ -57,8 +57,8 @@ public class FieldofView : MonoBehaviour
 
     void FindVisibleTargets()
     {
-        enemyMove.EnemyMove();
-        enemyMove.Recognized = false;
+        enemyMove.EnemyMove(); //execute the EnemyMove90 function in EnemyController script
+        enemyMove.Recognized = false; //in the EnemyController script, set the Recognized boolean to false.
 
         visibleTargets.Clear();
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
@@ -74,7 +74,7 @@ public class FieldofView : MonoBehaviour
                 {
                     visibleTargets.Add(target);
                     Debug.Log("TargetAdded"); // place attack/detect player reference here
-                    enemyMove.Recognized = true;
+                    enemyMove.Recognized = true; // in the EnemyController script, set the Recognized boolean to true.
                 }
             }
         }

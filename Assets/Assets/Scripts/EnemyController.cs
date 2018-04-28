@@ -39,27 +39,27 @@ public class EnemyController : MonoBehaviour {
 
     }
 
-    public void EnemyMove()
+    public void EnemyMove() //execute enemy move function
     {
 
-        if (Recognized == true)
+        if (Recognized == true) // if the Recognized boolean is set to true (so if the player is within the NPC's line of sight)
         {
-            agent.SetDestination(target.transform.position);
-            Enemy_Animate.SetBool("bl_walking", true);
-            agent.isStopped = false;
+            agent.SetDestination(target.transform.position); // assign the player (target) as the agent's (NPC) target
+            Enemy_Animate.SetBool("bl_walking", true); //ensure walking bool is set to true for animation (so we can set it to false later)
+            agent.isStopped = false; // Ensure the agent is not stopped (so we can stop it later)
 
             if (Vector3.Distance(target.position, this.transform.position) < 8)
             {
                 Debug.Log("AttackPlayer"); // attack the player function to go here
-                Enemy_Animate.SetBool("bl_walking", false); // can set attack animation to true when implemented
-                agent.isStopped = true; // makes the agent pause its process
+                Enemy_Animate.SetBool("bl_walking", false); // can set attack animation to true when implemented (is set back to true when player goes >8 units)
+                agent.isStopped = true; // makes the agent pause its process (is set back to false when player goes >8 units)
             }
         }
 
 
         else
         {
-            Patrol();
+            Patrol(); // execute patrol function
         }
     }
 
@@ -71,8 +71,8 @@ public class EnemyController : MonoBehaviour {
         if (Waypoints.Length > 0)
         {  
 
-            agent.SetDestination(Waypoints[in_next_wp].transform.position);
-            Enemy_Animate.SetBool("bl_walking", true);
+            agent.SetDestination(Waypoints[in_next_wp].transform.position);//set the agents destination as the next Waypoint in the array
+            Enemy_Animate.SetBool("bl_walking", true); // ensure the iswalking bool is set to true (so the NPC animates while approaching destinations)
 
             // if we get close move to WP target the next
             if (Vector3.Distance(Waypoints[in_next_wp].transform.position, transform.position) < 1)
@@ -80,17 +80,17 @@ public class EnemyController : MonoBehaviour {
                 if (in_next_wp < Waypoints.Length - 1)
                     in_next_wp++;
                 else
-                    in_next_wp = 0;
+                    in_next_wp = 0; // restart the waypoint rotation
             }
         }
     }
 
-    public void HitByRay()
+    public void HitByRay() // when the NPC registers a raycast
     {
         Debug.Log("I was hit by a Ray");
-        Health -= 1;
+        Health -= 1; // lose 1 health
 
-       if (Health == 0)
+       if (Health == 0) // if health becomes 0
        {
           Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
           Destroy(gameObject); //destroy the object this is attached to

@@ -416,7 +416,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4940137786713608, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -49.866264
+      value: -49.3
       objectReference: {fileID: 0}
     - target: {fileID: 4940137786713608, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
       propertyPath: m_LocalPosition.y
@@ -424,7 +424,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4940137786713608, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 31.580053
+      value: -7.4
       objectReference: {fileID: 0}
     - target: {fileID: 4940137786713608, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
       propertyPath: m_LocalRotation.x
@@ -471,9 +471,39 @@ Prefab:
       propertyPath: Waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 992456243}
+    - target: {fileID: 82937830728473818, guid: 865dda4a66a976649aebdbe140f6e558,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114450937160220756, guid: 865dda4a66a976649aebdbe140f6e558,
+        type: 2}
+      propertyPath: IdentifiedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f590678482940047b93553fb1414145, type: 3}
+    - target: {fileID: 82937830728473818, guid: 865dda4a66a976649aebdbe140f6e558,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f590678482940047b93553fb1414145, type: 3}
+    - target: {fileID: 114450937160220756, guid: 865dda4a66a976649aebdbe140f6e558,
+        type: 2}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 346217520}
+    - target: {fileID: 114450937160220756, guid: 865dda4a66a976649aebdbe140f6e558,
+        type: 2}
+      propertyPath: RecognizedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f590678482940047b93553fb1414145, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 865dda4a66a976649aebdbe140f6e558, type: 2}
   m_IsPrefabParent: 0
+--- !u!82 &346217520 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82937830728473818, guid: 865dda4a66a976649aebdbe140f6e558,
+    type: 2}
+  m_PrefabInternal: {fileID: 256039592}
 --- !u!1 &351904587
 GameObject:
   m_ObjectHideFlags: 0
