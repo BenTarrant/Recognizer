@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23793230363019228}
   m_Layer: 8
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 124472473637585966}
   - component: {fileID: 81792595409143218}
   - component: {fileID: 114049353269109040}
+  - component: {fileID: 114120817730567408}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -469,7 +470,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1946372314861088}
   m_LocalRotation: {x: -0, y: 0.21496926, z: -0, w: 0.97662085}
-  m_LocalPosition: {x: -23.71, y: 0.09000003, z: -6.66}
+  m_LocalPosition: {x: -37.7, y: 0.09000003, z: -2.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4024413147263492}
@@ -487,7 +488,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1797161135326964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.091, y: 1.717, z: 0.09}
+  m_LocalPosition: {x: 0.091, y: 1.7, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224526035594226352}
@@ -1079,7 +1080,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6301aebd415bc74fb9d17583bcbdc45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1277,6 +1278,9 @@ MonoBehaviour:
   - {fileID: 1836193334045012}
   currentWeapon: 1
   HasWeapon2: 0
+  Health: 1
+  Deresolution: {fileID: 1515723575253672, guid: 08f07b6d578acab489f7ac52c2c15bfa,
+    type: 2}
 --- !u!114 &114049353269109040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1289,6 +1293,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: f088612e9902ebd48b408979618b481a, type: 2}
+--- !u!114 &114120817730567408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1797161135326964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f925a96b31b15864490d762c43cc3cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobbingSpeed: 0.1
+  bobbingAmount: 0.02
+  midpoint: 1.7
 --- !u!114 &114144374566638164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1362,14 +1380,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.497}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fbaee01644dd4c64ca5ebb03b831c28b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f847f30de2edbb44ab27fcbd9257e617, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -24,8 +24,9 @@ GameObject:
   - component: {fileID: 54960712864349084}
   - component: {fileID: 108303999348252208}
   - component: {fileID: 135962143255710166}
+  - component: {fileID: 114326342867654664}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: EnemyBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4747f7eae8886f74bb9bf8da328fa7e6, type: 2}
+  - {fileID: 2100000, guid: a6301aebd415bc74fb9d17583bcbdc45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +110,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0, g: 0.83448267, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.51724136, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 25
@@ -136,6 +137,17 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114326342867654664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377925345810600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97812257c6b59744baf40f46f5f854fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135962143255710166
 SphereCollider:
   m_ObjectHideFlags: 1

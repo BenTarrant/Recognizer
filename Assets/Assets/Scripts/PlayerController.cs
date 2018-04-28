@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,11 +26,14 @@ public class PlayerController : MonoBehaviour
     public int currentWeapon; // Sets each weapon as an int to be referenced
     public bool HasWeapon2; // creates a true/false situation for playing having weapon 2 in 'inventory'
 
+    //Health
+    public float Health = 1;
+    public GameObject Deresolution;
+
     void Start()
-    {
+    { 
         SetCursorState(); // Apply requested cursor state
         HasWeapon2 = false; //set so player doesn't have Weapon 2 (Rifle)
-        //changeWeapon(1);
     }
 
 
@@ -80,7 +85,6 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
         //Player Change Weapons
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) // When the number 1 key above the letter keys is pressed
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour
             {
                 Enemy = hit.transform.gameObject.GetComponent<EnemyController>();
                 Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy
-                
+
             }
         }
 
@@ -162,6 +166,30 @@ public class PlayerController : MonoBehaviour
                 Destroy(collision.gameObject); // destroy the pickup
                 changeWeapon(1); // Switch to the Pistol 
             }
+
         }
+    }
+
+    //BulletCollision
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("HitByBullet");
+        HitByEnemy();
+    }
+
+    //Shot by Enemy and Death
+    public void HitByEnemy() // when the NPC registers a raycast
+    {
+
+        Debug.Log("I was hit by an enemy");
+        Health -= 1; // lose 1 health
+
+        if (Health == 0)
+        {
+            Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
+            PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(2); // Load restart screen (TEMPORARY RESTART)
+        }
+
     }
 }

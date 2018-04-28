@@ -22,6 +22,11 @@ public class EnemyController : MonoBehaviour {
 
     //Attack
     public bool Recognized;
+    public GameObject BulletPrefab;
+    public Transform BulletStart;
+    public float BulletSpeed;
+    private float fl_delay; //reference for a function to implement cool-down timing
+    public float fl_cool_down = 1; // reference for cool-down effect for gun firing
 
 
     // Use this for initialization
@@ -45,15 +50,16 @@ public class EnemyController : MonoBehaviour {
         if (Recognized == true) // if the Recognized boolean is set to true (so if the player is within the NPC's line of sight)
         {
             agent.SetDestination(target.transform.position); // assign the player (target) as the agent's (NPC) target
-            Enemy_Animate.SetBool("bl_walking", true); //ensure walking bool is set to true for animation (so we can set it to false later)
-            agent.isStopped = false; // Ensure the agent is not stopped (so we can stop it later)
+            Attack();
+            //Enemy_Animate.SetBool("bl_walking", true); //ensure walking bool is set to true for animation (so we can set it to false later)
+            //agent.isStopped = false; // Ensure the agent is not stopped (so we can stop it later)
 
-            if (Vector3.Distance(target.position, this.transform.position) < 8)
-            {
-                Debug.Log("AttackPlayer"); // attack the player function to go here
-                Enemy_Animate.SetBool("bl_walking", false); // can set attack animation to true when implemented (is set back to true when player goes >8 units)
-                agent.isStopped = true; // makes the agent pause its process (is set back to false when player goes >8 units)
-            }
+            //if (Vector3.Distance(target.position, this.transform.position) < 8)
+            //{
+            //    Debug.Log("AttackPlayer"); // attack the player function to go here
+            //    //Enemy_Animate.SetBool("bl_walking", false); // can set attack animation to true when implemented (is set back to true when player goes >8 units)
+            //    //agent.isStopped = true; // makes the agent pause its process (is set back to false when player goes >8 units)
+            //}
         }
 
 
@@ -87,13 +93,7 @@ public class EnemyController : MonoBehaviour {
 
     public void HitByRay() // when the NPC registers a raycast
     {
-
-        Debug.Log("I was hit by a Ray");
         Health -= 1; // lose 1 health
-
-       if (Health == 0) // if health becomes 0
-
-        Health -= 1;
 
         if (Health == 0)
        {
@@ -103,5 +103,23 @@ public class EnemyController : MonoBehaviour {
         
     }
 
+    void Attack()
+    {
+        transform.LookAt(target);
+        
+
+        if (Time.time > fl_delay)
+        {
+            var bullet = (GameObject)Instantiate(BulletPrefab, BulletStart.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody>().velocity = transform.forward * BulletSpeed;
+            fl_delay = Time.time + fl_cool_down;
+        }
+
+    }
+
+
 }
+
+
+
 

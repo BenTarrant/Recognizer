@@ -6,7 +6,6 @@ using UnityEngine;
 public class Load_Game : MonoBehaviour {
 
     public Collider coll; // create a reference for the collider in the IDE
-    public GameObject Deresoloution; // sets a reference for the game object to be instatiated in the IDE
     public AudioClip LaunchClip; // create reference for the audio clip in the IDE
     public GameObject ClickedTitle; // create a reference for the clicked version of the title in the IDE
     public MenuPlayer menuPlayer;

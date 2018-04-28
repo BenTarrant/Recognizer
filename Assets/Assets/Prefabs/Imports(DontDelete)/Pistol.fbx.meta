@@ -48,6 +48,14 @@ ModelImporter:
     4300010: P_Light
     4300012: P_Sight
     4300014: P_Body
+    6400000: P_Body
+    6400002: P_Bullet
+    6400004: P_Hammer
+    6400006: P_Light
+    6400008: P_Magazine
+    6400010: P_Sight
+    6400012: P_Slide
+    6400014: P_Trigger
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -81,7 +89,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

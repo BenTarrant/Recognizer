@@ -73,8 +73,7 @@ public class FieldofView : MonoBehaviour
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
-                    Debug.Log("TargetAdded"); // place attack/detect player reference here
-                    enemyMove.Recognized = true; // in the EnemyController script, set the Recognized boolean to true.
+                    enemyMove.Recognized = true; // in the EnemyController script, set the Recognized boolean to true (Start attack function)
                 }
             }
         }
