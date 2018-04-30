@@ -54,7 +54,7 @@ public class MenuPlayer : MonoBehaviour {
     {
         
         yield return new WaitForSeconds(2.5f);// wait for 2.5 seconds
-        SceneManager.LoadScene("Test01"); // load the scene title X
+        SceneManager.LoadScene("Level01"); // load the scene title X
 
     }
 }

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public MuzzleFlash flash; // a reference for the MuzzleFlash script to play specific muzzle flashes based on weapon equipped
 
     //Access EnemyController
-    public EnemyController Enemy; // reference to the Enemy Controller script, specified in IDE
+    private EnemyController Enemy; // reference to the Enemy Controller script, specified in IDE
 
     //Weapon Switching
     public GameObject[] weapons; // Creates an array of weapons
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public bool HasWeapon2; // creates a true/false situation for playing having weapon 2 in 'inventory'
 
     //Health
-    public float Health = 1;
+    private float Health = 1;
     public GameObject Deresolution;
 
     void Start()
@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) // When the number 1 key above the letter keys is pressed
         {
             changeWeapon(1); // change to Weapon 1
-            range = 30.0f; // set a new range
-            fl_cool_down = 1.0f; // set a new cooldown
+            range = 40.0f; // set a new range
+            fl_cool_down = 1.5f; // set a new cooldown
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) // When the number 2 key above the letter keys is pressed
@@ -187,9 +187,17 @@ public class PlayerController : MonoBehaviour
         if (Health == 0)
         {
             Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
-            PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
-            SceneManager.LoadScene(2); // Load restart screen (TEMPORARY RESTART)
+            PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name); //get the current scene and set it to a string (to allow correct reloading)
+            SceneManager.LoadScene("RestartScreen"); // Load restart screen
         }
 
     }
+
+    void OnParticleCollision(GameObject other)
+    {
+
+        SceneManager.LoadScene("CompleteScreen");
+
+    }
 }
+
