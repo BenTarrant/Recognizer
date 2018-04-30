@@ -466,6 +466,11 @@ Prefab:
       propertyPath: RetryClickedTitle
       value: 
       objectReference: {fileID: 1974817389}
+    - target: {fileID: 114711963669389396, guid: 8d7812491a35bf94ca8f2d54b2c8015a,
+        type: 2}
+      propertyPath: ReLaunchClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c04c6aa6386aabb4a8d2aa27e5d47db0, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d7812491a35bf94ca8f2d54b2c8015a, type: 2}
   m_IsPrefabParent: 0
