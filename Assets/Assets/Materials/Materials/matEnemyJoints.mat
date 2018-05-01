@@ -62,7 +62,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
-    - _InvFade: 1
+    - _InvFade: 1.04
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1

@@ -11,7 +11,7 @@ public class EnemyBulletBehaviour : MonoBehaviour
         Destroy(gameObject, 2.0f);
     }
 
-    void OnCollisionEnter(Collision collision) //when the colliding with a trigger collider
+    void OnCollisionEnter(Collision collision) //when the colliding with a collider
     {
 
         if (collision.gameObject.tag == "Player") // if the raycast hits an object tagged enemy
