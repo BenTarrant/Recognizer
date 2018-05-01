@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     public bool HasWeapon2; // creates a true/false situation for playing having weapon 2 in 'inventory'
 
     //Health
-    private float Health = 1;
+    public Text Healthtext;
+    private float Health = 2;
     public GameObject Deresolution;
 
     void Start()
@@ -182,7 +183,8 @@ public class PlayerController : MonoBehaviour
     {
 
         Debug.Log("I was hit by an enemy");
-        Health -= 1; // lose 1 health
+        Health -= 1;
+        Healthtext.text = "Health: " + Mathf.Round(Health);
 
         if (Health == 0)
         {
