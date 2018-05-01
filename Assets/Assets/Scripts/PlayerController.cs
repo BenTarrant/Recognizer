@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     //Player Movement and Looking
     public float movementSpeed = 5.0f; // public reference to movement speed
     public float mouseSensitivity = 5.0f;// public reference for mouse sensitivity
+    float verticalRotation = 0;
+    public float upDownRange = 60.0f;
 
     //Shooting references
     public Camera FPScamera; //Reference to the camera attached to the player for raycasting
@@ -18,8 +20,8 @@ public class PlayerController : MonoBehaviour
     public float fl_cool_down = 1; // reference for cool-down effect for gun firing
     public MuzzleFlash flash; // a reference for the MuzzleFlash script to play specific muzzle flashes based on weapon equipped
 
-    //Access EnemyController
-    private EnemyController Enemy; // reference to the Enemy Controller script, specified in IDE
+    //Access EnemyEntity
+    private EnemyEntity Enemy; // reference to the Enemy Controller script, specified in IDE
 
     //Weapon Switching
     public GameObject[] weapons; // Creates an array of weapons
@@ -52,6 +54,11 @@ public class PlayerController : MonoBehaviour
         //Camera Roatation
         float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity;
         transform.Rotate(0, rotLeftRight, 0);
+
+        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
+        Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+
         // causes mouse to move horizontal roatation based on mouse sensitivty float
         //Could eventually be incorporated into a UI slider so player can edit
 
@@ -91,8 +98,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) // When the number 1 key above the letter keys is pressed
         {
             changeWeapon(1); // change to Weapon 1
-            range = 40.0f; // set a new range
-            fl_cool_down = 1.5f; // set a new cooldown
+            range = 50.0f; // set a new range
+            fl_cool_down = 0.5f; // set a new cooldown
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) // When the number 2 key above the letter keys is pressed
@@ -120,7 +127,7 @@ public class PlayerController : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "Enemy") // if the raycast hits an object tagged enemy
             {
-                Enemy = hit.transform.gameObject.GetComponent<EnemyController>();
+                Enemy = hit.transform.gameObject.GetComponent<EnemyEntity>();
                 Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy
 
             }
