@@ -9,7 +9,7 @@ public abstract class EnemyEntity : MonoBehaviour
     public float Health;
     public GameObject Deresolution;
     public NavMeshAgent agent;
-    [HideInInspector] public Transform target;
+    [HideInInspector] public Transform target; //Hides in the inspector so it isn't overidden by each enemy's start function but remains public so it can still be called
 
 
     // Use this for initialization

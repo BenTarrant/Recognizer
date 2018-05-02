@@ -147,7 +147,6 @@ public class PlayerController : MonoBehaviour
             // reference this process with changeWeapon(*desired weapon number*);
         }
 
-
     }
 
     //pickup functionality
@@ -191,15 +190,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //BulletCollision
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.transform.tag != "Ground" || collision.transform.tag != "Wall")
-    //    {
-    //        Debug.Log("HitByBullet");
-    //        HitByEnemy(); 
-    //    }
-    //}
 
     //Shot by Enemy and Death
     public void HitByEnemy(int vDamage)
