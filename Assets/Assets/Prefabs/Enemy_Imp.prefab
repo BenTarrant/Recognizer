@@ -2010,7 +2010,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376960238291046}
   m_LocalRotation: {x: -0, y: 0.31375104, z: -0, w: -0.9495053}
-  m_LocalPosition: {x: -69.169556, y: 0.19, z: -30.95483}
+  m_LocalPosition: {x: -33.757214, y: 0.20000446, z: 8.753784}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4843136560143354}
@@ -2074,11 +2074,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f98e55b82dfb9c40bee857af7f3a404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
+  Health: 3
   Deresolution: {fileID: 1535501104761706, guid: 1cef784160180304da6e44d27cee15c4,
     type: 2}
   agent: {fileID: 195190032981586054}
-  target: {fileID: 0}
+  target: {fileID: 4013873050611448, guid: 8a1b6873bc9d9114e92499810a3ee6e0, type: 2}
   BulletPrefab: {fileID: 1377925345810600, guid: e4ffa5da96567ad4abf93faca7aea081,
     type: 2}
   BulletStart: {fileID: 4118089248718722}
@@ -2112,7 +2112,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2a9e4274bb67a2242bb5885b4268e841, type: 2}
+  - {fileID: 2100000, guid: 11e3700d635bab246ab26250b5f48558, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2270,7 +2270,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

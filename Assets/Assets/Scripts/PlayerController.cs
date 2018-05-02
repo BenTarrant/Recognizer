@@ -151,55 +151,69 @@ public class PlayerController : MonoBehaviour
     }
 
     //pickup functionality
-    void OnTriggerEnter(Collider collision) //when the colliding with a trigger collider
+    private void OnCollisionEnter(Collision collision)//void OnTriggerEnter(Collider collider) //when the colliding with a trigger collider
     {
-
-        if (collision.gameObject.tag == "Pickup") // check to see if the item collided with is designated as a pickup
+        if (collision.transform.tag != "Ground" || collision.transform.tag != "Wall")
         {
-        //then run through to check what type of pick up it is
-        //this check means additional if statements can be added to implement new pick ups like Health and Ammo
+            Debug.Log("Hit Something");
 
-            if (collision.gameObject.name == "Pickup_Weapon_Rifle") // if it's the Rifle pickup
+            if (collision.gameObject.tag == "Sword")
             {
-                Destroy(collision.gameObject); // destroy the pickup
-                HasWeapon2 = true;
-                range = 50.0f; // Set a new range
-                fl_cool_down = 0.1f; // set a new cooldown
-                changeWeapon(2); // switch to the Rifle weapon (2 in array)
-
+                HitByEnemy(10);
             }
 
-            if (collision.gameObject.name == "Pickup_Weapon_Pistol") // if it's the Pistol pickup
+            if (collision.gameObject.tag == "Bullet")
             {
-                Destroy(collision.gameObject); // destroy the pickup
-                changeWeapon(1); // Switch to the Pistol 
+                HitByEnemy(1);
             }
 
+            if (collision.gameObject.tag == "Pickup") // check to see if the item collided with is designated as a pickup
+            {
+                //then run through to check what type of pick up it is
+                //this check means additional if statements can be added to implement new pick ups like Health and Ammo
+
+                if (collision.gameObject.name == "Pickup_Weapon_Rifle") // if it's the Rifle pickup
+                {
+                    Destroy(collision.gameObject); // destroy the pickup
+                    HasWeapon2 = true;
+                    range = 50.0f; // Set a new range
+                    fl_cool_down = 0.1f; // set a new cooldown
+                    changeWeapon(2); // switch to the Rifle weapon (2 in array)
+
+                }
+
+                if (collision.gameObject.name == "Pickup_Weapon_Pistol") // if it's the Pistol pickup
+                {
+                    Destroy(collision.gameObject); // destroy the pickup
+                    changeWeapon(1); // Switch to the Pistol 
+                }
+            }
         }
     }
 
     //BulletCollision
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("HitByBullet");
-        HitByEnemy();
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.tag != "Ground" || collision.transform.tag != "Wall")
+    //    {
+    //        Debug.Log("HitByBullet");
+    //        HitByEnemy(); 
+    //    }
+    //}
 
     //Shot by Enemy and Death
-    public void HitByEnemy() // when the NPC registers a raycast
+    public void HitByEnemy(int vDamage)
     {
-
         Debug.Log("I was hit by an enemy");
-        Health -= 1;
+        Health -= vDamage;
         Healthtext.text = "Health: " + Mathf.Round(Health);
 
-        if (Health == 0)
+        if (Health <= 0)
         {
             Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
             PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name); //get the current scene and set it to a string (to allow correct reloading)
             SceneManager.LoadScene("RestartScreen"); // Load restart screen
         }
-
     }
 
     void OnParticleCollision(GameObject other)

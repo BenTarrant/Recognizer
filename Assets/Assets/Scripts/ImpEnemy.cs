@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ImpEnemy : EnemyEntity {
+public class ImpEnemy : EnemyEntity
+{
 
     private Animator Enemy_Animate;
 
@@ -13,15 +14,19 @@ public class ImpEnemy : EnemyEntity {
     public float fl_cool_down = 1;
 
     // Use this for initialization
-    void Start () {
+
+    public override void Start()
+    {
+        base.Start();
+
         Enemy_Animate = GetComponent<Animator>();
         Enemy_Animate.SetBool("bl_walking", true);
         agent.SetDestination(target.transform.position);
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Update is called once per frame
+    void Update()
+    {
         transform.LookAt(target);
 
         if (Vector3.Distance(target.position, this.transform.position) < 10)

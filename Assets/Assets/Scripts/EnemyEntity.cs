@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class EnemyEntity : MonoBehaviour {
+public abstract class EnemyEntity : MonoBehaviour
+{
 
     public float Health;
     public GameObject Deresolution;
     public NavMeshAgent agent;
-    public Transform target;
-
-
+    [HideInInspector] public Transform target;
 
 
     // Use this for initialization
-    void Start () {
+    public virtual void Start()
+    {
+        target = FindObjectOfType<PlayerController>().transform;
 
+        if (!target)
+        {
+            Debug.Log("No Target in EnemyEntity.cs");
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Update is called once per frame
+    void Update()
+    {
+        //print("Position: " + target.transform.position + ", name: " + target.name);
     }
 
     public virtual void HitByRay() // when the NPC registers a raycast
@@ -32,6 +38,5 @@ public abstract class EnemyEntity : MonoBehaviour {
             Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
             Destroy(gameObject); //destroy the object this is attached to
         }
-
     }
 }

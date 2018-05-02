@@ -11,9 +11,9 @@ public class LostPixelEnemy : EnemyEntity
 
 
 
-    void Start()
+    public override void Start()
     {
-
+        base.Start();
     }
 
     void Update()
@@ -31,9 +31,9 @@ public class LostPixelEnemy : EnemyEntity
     void OnCollisionEnter(Collision collision)
     {
 
-      Debug.Log("HitPlayer");
-      Instantiate(Deresolution, transform.position, transform.rotation);
-      Destroy(gameObject);
+        Debug.Log("HitPlayer");
+        Instantiate(Deresolution, transform.position, transform.rotation);
+        Destroy(gameObject);
 
     }
 }

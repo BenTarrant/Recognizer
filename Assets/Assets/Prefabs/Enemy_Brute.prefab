@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 65588316348303386}
   m_Layer: 0
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1577,8 +1577,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428277126130918}
   m_LocalRotation: {x: -0, y: 0.31375104, z: -0, w: -0.9495053}
-  m_LocalPosition: {x: -41.03, y: 0.45401946, z: -41.02}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -64.29986, y: 0.20000261, z: 24.406775}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
   - {fileID: 4106019322091092}
   m_Father: {fileID: 0}
@@ -2129,8 +2129,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.37, y: 0.28, z: 1.54}
-  m_Center: {x: 0, y: 0, z: -1.63}
+  m_Size: {x: 0.25, y: 0.3, z: 2.75}
+  m_Center: {x: 0, y: 0, z: -1.45}
 --- !u!95 &95379931325018870
 Animator:
   serializedVersion: 3
@@ -2159,7 +2159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad019fad3c2b23a42832829e04d77dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
+  Health: 6
   Deresolution: {fileID: 1535501104761706, guid: 1cef784160180304da6e44d27cee15c4,
     type: 2}
   agent: {fileID: 195764440346693868}
@@ -2191,7 +2191,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2a9e4274bb67a2242bb5885b4268e841, type: 2}
+  - {fileID: 2100000, guid: 97c8c7b679273884fa74750f86c852e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2348,7 +2348,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1428277126130918}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50

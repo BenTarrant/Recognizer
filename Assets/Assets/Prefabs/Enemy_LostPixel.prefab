@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
-  Deresolution: {fileID: 1515723575253672, guid: 08f07b6d578acab489f7ac52c2c15bfa,
+  Deresolution: {fileID: 1535501104761706, guid: 1cef784160180304da6e44d27cee15c4,
     type: 2}
   agent: {fileID: 0}
-  target: {fileID: 0}
+  target: {fileID: 4013873050611448, guid: 8a1b6873bc9d9114e92499810a3ee6e0, type: 2}
   MoveSpeed: 10
   MaxDist: 10
   MinDist: 0
