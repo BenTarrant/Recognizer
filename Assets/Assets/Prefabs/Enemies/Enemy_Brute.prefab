@@ -1577,7 +1577,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428277126130918}
   m_LocalRotation: {x: -0, y: 0.31375104, z: -0, w: -0.9495053}
-  m_LocalPosition: {x: -64.29986, y: 0.20000261, z: 24.406775}
+  m_LocalPosition: {x: -63.99915, y: 0.19999847, z: 59.05221}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
   - {fileID: 4106019322091092}
@@ -2162,6 +2162,7 @@ MonoBehaviour:
   Health: 6
   Deresolution: {fileID: 1535501104761706, guid: 1cef784160180304da6e44d27cee15c4,
     type: 2}
+  Rifle: {fileID: 1966904524988168, guid: 67db9550e9f8eff4097f471734b6f145, type: 2}
   agent: {fileID: 195764440346693868}
   target: {fileID: 0}
 --- !u!136 &136695487864242966

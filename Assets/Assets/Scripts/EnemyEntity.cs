@@ -8,6 +8,7 @@ public abstract class EnemyEntity : MonoBehaviour
 
     public float Health;
     public GameObject Deresolution;
+    public GameObject Rifle;
     public NavMeshAgent agent;
     [HideInInspector] public Transform target; //Hides in the inspector so it isn't overidden by each enemy's start function but remains public so it can still be called
 
@@ -16,11 +17,6 @@ public abstract class EnemyEntity : MonoBehaviour
     public virtual void Start()
     {
         target = FindObjectOfType<PlayerController>().transform;
-
-        if (!target)
-        {
-            Debug.Log("No Target in EnemyEntity.cs");
-        }
     }
 
     // Update is called once per frame
@@ -29,14 +25,24 @@ public abstract class EnemyEntity : MonoBehaviour
         //print("Position: " + target.transform.position + ", name: " + target.name);
     }
 
-    public virtual void HitByRay() // when the NPC registers a raycast
+    public virtual void HitByRay(int vDamage) // when the NPC registers a raycast
     {
-        Health -= 1; // lose 1 health
+        Health -= vDamage; // lose health equal to damage received
 
         if (Health == 0)
         {
-            Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
-            Destroy(gameObject); //destroy the object this is attached to
+            Instantiate(Deresolution, transform.position + (transform.up * 1), transform.rotation); //instatiate the deresolution protocol at game object location
+            if ((gameObject.GetComponent("BruteEnemy") as BruteEnemy) != null)
+            {
+                Instantiate(Rifle, transform.position + (transform.up * 1), transform.rotation);
+                Destroy(gameObject); //destroy the object this is attached to
+            }
+
+            else
+            {
+                Destroy(gameObject); //destroy the object this is attached to
+            }
+                
         }
     }
 }

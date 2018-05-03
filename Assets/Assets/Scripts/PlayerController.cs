@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    //audio
+    public AudioSource Sourceaudio;
+
+
     //Player Movement and Looking
     public float movementSpeed = 5.0f; // public reference to movement speed
     public float mouseSensitivity = 5.0f;// public reference for mouse sensitivity
@@ -19,6 +23,15 @@ public class PlayerController : MonoBehaviour
     private float fl_delay; //reference for a function to implement cool-down timing
     public float fl_cool_down = 1; // reference for cool-down effect for gun firing
     public MuzzleFlash flash; // a reference for the MuzzleFlash script to play specific muzzle flashes based on weapon equipped
+    public AudioClip Shot;
+    //private float Damage;
+
+    //pickup
+    public Object[] Pickup;
+
+    //Ammo
+    private float RifleAmmo;
+    public Text AmmoText;
 
     //Access EnemyEntity
     private EnemyEntity Enemy; // reference to the Enemy Controller script, specified in IDE
@@ -27,30 +40,38 @@ public class PlayerController : MonoBehaviour
     public GameObject[] weapons; // Creates an array of weapons
     public int currentWeapon; // Sets each weapon as an int to be referenced
     public bool HasWeapon2; // creates a true/false situation for playing having weapon 2 in 'inventory'
+    public AudioClip WeaponSwitch;
+    public AudioClip WeaponPickup;
 
     //Health
     public Text Healthtext;
-    private float Health = 2;
+    private float Health = 10;
     public GameObject Deresolution;
+    public AudioClip HealthPickup;
 
     void Start()
-    { 
+    {
+        Pickup = null;
         SetCursorState(); // Apply requested cursor state
         HasWeapon2 = false; //set so player doesn't have Weapon 2 (Rifle)
-    }
+        Healthtext.text = "Health: " + Mathf.Round(Health); // sets the initial starting heath from private float above and displays it in the referenced text component
+        GetComponent<AudioSource>();
+        Pickup = Resources.LoadAll("", typeof(GameObject));
 
+        if (Pickup == null)
+        {
+            Pickup = Resources.LoadAll("", typeof(GameObject)) as GameObject[];
+        }
+    }
 
     void SetCursorState()
     {
         Cursor.lockState = CursorLockMode.Locked; // Stops cursor moving during play
     }
 
-
     // Update is called once per frame
     void Update()
     {
-
-
         //Camera Roatation
         float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity;
         transform.Rotate(0, rotLeftRight, 0);
@@ -80,44 +101,64 @@ public class PlayerController : MonoBehaviour
 
             if (weapons[2].gameObject.activeSelf == true) // if weapon 2 is active (equipped)
             {
+                RifleAmmo = RifleAmmo - 1;
+                AmmoText.text = "Ammo: " + Mathf.Round(RifleAmmo);
                 flash.Flash2(); // run weapon 2's muzzle flash
+
+                if (RifleAmmo <= 0)
+                {
+                    weapons[2].gameObject.SetActive(false);
+                    HasWeapon2 = false;
+                    AmmoText.text = ("");
+                    weapons[1].gameObject.SetActive(true);
+                    Sourceaudio.clip = WeaponSwitch;
+                    Sourceaudio.Play();
+                    fl_cool_down = 0.2f;
+                }
             }
 
             else //otherwise
             {
                 flash.Flash1(); //run weapon 1's muzzle flash
 
-                // This works for two weapons due to the ability to use true/false checks, however it would need to be revisted if more than two weapons wanted to be introduced.
+                // This works for two weapons due to the ability to use true/false checks, however it would need to be revisted 
+                //if more than two weapons were to be introduced.
             }
-
         }
-
 
         //Player Change Weapons
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) // When the number 1 key above the letter keys is pressed
         {
+            AmmoText.text = ("");
             changeWeapon(1); // change to Weapon 1
             range = 50.0f; // set a new range
-            fl_cool_down = 0.5f; // set a new cooldown
+            fl_cool_down = 0.2f; // set a new cooldown
+            Sourceaudio.clip = WeaponSwitch;
+            Sourceaudio.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) // When the number 2 key above the letter keys is pressed
         {
             if (HasWeapon2 == true) // check to see if Player has picked up Weapon 2 (Rifle)
             {
+                AmmoText.text = "Ammo: " + Mathf.Round(RifleAmmo);
                 changeWeapon(2); // change to Weapon 2
+                Sourceaudio.clip = WeaponSwitch;
+                Sourceaudio.Play();
                 range = 50.0f; // Set a new range
                 fl_cool_down = 0.1f; // set a new cooldown
             }
         }
-
     }
 
     void Shoot() // shoot method
     {
-        
-        
+
+        Sourceaudio.clip = Shot;
+        Sourceaudio.Play();
+
+
 
         RaycastHit hit;//fire a raycast
         if (Physics.Raycast(FPScamera.transform.position, FPScamera.transform.forward, out hit, range))//if the raycast hits something within range
@@ -128,7 +169,18 @@ public class PlayerController : MonoBehaviour
             if (hit.transform.gameObject.tag == "Enemy") // if the raycast hits an object tagged enemy
             {
                 Enemy = hit.transform.gameObject.GetComponent<EnemyEntity>();
-                Enemy.HitByRay();//run the function HitByRay in the EnemyController script attached to the enemy
+
+                if (weapons[2].gameObject.activeSelf == true)
+                {
+                    
+                    Enemy.HitByRay(2);//run the function HitByRay in the script attached to the enemy dealing 2 damage
+                }
+
+                else
+                {
+                    
+                    Enemy.HitByRay(1); //run the function HitByRay in the script attached to the enemy dealing 1 damage
+                }
 
             }
         }
@@ -154,16 +206,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.tag != "Ground" || collision.transform.tag != "Wall")
         {
-            Debug.Log("Hit Something");
 
             if (collision.gameObject.tag == "Sword")
             {
-                HitByEnemy(10);
+                HitByEnemy(10); // sword hits = 10 damage to player
             }
 
             if (collision.gameObject.tag == "Bullet")
             {
-                HitByEnemy(1);
+                HitByEnemy(1); // bullet hits = 1 damage to player
             }
 
             if (collision.gameObject.tag == "Pickup") // check to see if the item collided with is designated as a pickup
@@ -171,20 +222,35 @@ public class PlayerController : MonoBehaviour
                 //then run through to check what type of pick up it is
                 //this check means additional if statements can be added to implement new pick ups like Health and Ammo
 
-                if (collision.gameObject.name == "Pickup_Weapon_Rifle") // if it's the Rifle pickup
+                if (collision.gameObject.name.Contains(Pickup[2].name)) // if it's the Rifle pickup
                 {
+                    RifleAmmo = RifleAmmo + 10;
+                    AmmoText.text = "Ammo: " + Mathf.Round(RifleAmmo);
                     Destroy(collision.gameObject); // destroy the pickup
                     HasWeapon2 = true;
                     range = 50.0f; // Set a new range
                     fl_cool_down = 0.1f; // set a new cooldown
+                    Sourceaudio.clip = WeaponPickup;
+                    Sourceaudio.Play();
                     changeWeapon(2); // switch to the Rifle weapon (2 in array)
 
                 }
 
-                if (collision.gameObject.name == "Pickup_Weapon_Pistol") // if it's the Pistol pickup
+                if (collision.gameObject.name.Contains(Pickup[1].name)) // if it's the Pistol pickup
                 {
                     Destroy(collision.gameObject); // destroy the pickup
+                    Sourceaudio.clip = WeaponPickup;
+                    Sourceaudio.Play();
                     changeWeapon(1); // Switch to the Pistol 
+                }
+
+                if (collision.gameObject.name.Contains(Pickup[0].name))
+                {
+                    Destroy(collision.gameObject);
+                    Sourceaudio.clip = HealthPickup;
+                    Sourceaudio.Play();
+                    Health = Health + 5;
+                    Healthtext.text = "Health: " + Mathf.Round(Health);
                 }
             }
         }
