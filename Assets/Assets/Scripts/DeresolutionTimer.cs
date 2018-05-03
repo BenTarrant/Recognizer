@@ -16,28 +16,31 @@ public class DeresolutionTimer : MonoBehaviour
 
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-
-        if (timeLeft >= 0)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level01"))
         {
-            Timertext.text = "Materialization:" + Mathf.Round(timeLeft);
-        }
+            timeLeft -= Time.deltaTime;
 
-        if (Mathf.Round(timeLeft) == 90)
-        {
-            Destroy(StartBarriers);
-        }
+            if (timeLeft >= 0)
+            {
+                Timertext.text = "Materialization:" + Mathf.Round(timeLeft);
+            }
 
-        if (Mathf.Round(timeLeft) == 60)
-        {
-            Destroy(FloorBarrier);
-        }
+            if (Mathf.Round(timeLeft) == 90)
+            {
+                Destroy(StartBarriers);
+            }
 
-        if (timeLeft <= 0)
-        {
-            Destroy(TeleportBarriers);
-            Timertext.text = ("");
+            if (Mathf.Round(timeLeft) == 60)
+            {
+                Destroy(FloorBarrier);
+            }
 
+            if (timeLeft <= 0)
+            {
+                Destroy(TeleportBarriers);
+                Timertext.text = ("");
+
+            }
         }
         
     }

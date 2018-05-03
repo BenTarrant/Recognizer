@@ -264,7 +264,7 @@ public class PlayerController : MonoBehaviour
         Health -= vDamage;
         Healthtext.text = "Health: " + Mathf.Round(Health);
 
-        if (Health <= 0)
+        if (Health <= 0) // death
         {
             Instantiate(Deresolution, transform.position, transform.rotation); //instatiate the deresolution protocol at game object location
             PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name); //get the current scene and set it to a string (to allow correct reloading)
