@@ -14,14 +14,14 @@ public class ReplayGame : MonoBehaviour
     {
         collide = GetComponent<Collider>(); //retrieve the collider
 
-        SetCursorState();
+        SetCursorState(); // run cursor state method
 
 
     }
 
-    void SetCursorState()
+    void SetCursorState() // cursor state method
     {
-        Cursor.lockState = CursorLockMode.None; // Stops cursor moving during play
+        Cursor.lockState = CursorLockMode.None; // releases cursor
     }
 
     void Update()
@@ -34,7 +34,7 @@ public class ReplayGame : MonoBehaviour
 
             if (collide.Raycast(ray, out hit, 100.0F)) // if tyhe raycast hits the collider attached to this GO
             {
-                StartCoroutine(ReLoadLevel()); // start the LoadLevel Coroutine
+                StartCoroutine(ReLoadLevel()); // start the ReLoadLevel Coroutine
             }
 
 
@@ -47,7 +47,7 @@ public class ReplayGame : MonoBehaviour
         transform.position = new Vector3(-100.55f, 2.2f, -600.7f);// Move the Unclicked title (Blue) out of shot
         ReplayClickedTitle.SetActive(true); // Set the Clicked title (Orange) GO to active - the illusion of changing colour
         yield return new WaitForSeconds(1.5f);// wait for 2.5 seconds
-        SceneManager.LoadScene("MenuScreen");
+        SceneManager.LoadScene("MenuScreen"); // load the main menu screen
 
     }
 }

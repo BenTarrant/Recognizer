@@ -1445,7 +1445,7 @@ MonoBehaviour:
   range: 50
   ImpactEffect: {fileID: 1979116857263880, guid: 72e374f5ff7736e40a8e6c771fecdcbe,
     type: 2}
-  fl_cool_down: 0.2
+  fl_cool_down: 0.4
   flash: {fileID: 114244357192704098}
   Shot: {fileID: 8300000, guid: d3bcbb06f06b4184a8e351268ec6817d, type: 3}
   Pickup:
@@ -1462,8 +1462,6 @@ MonoBehaviour:
   WeaponSwitch: {fileID: 8300000, guid: 294b3a005cac0cc46b82704ed9f385f1, type: 3}
   WeaponPickup: {fileID: 8300000, guid: 630c88fa0a59c7846bfce53d70a2c3b6, type: 3}
   Healthtext: {fileID: 114022433089521370}
-  Deresolution: {fileID: 1515723575253672, guid: 08f07b6d578acab489f7ac52c2c15bfa,
-    type: 2}
   HealthPickup: {fileID: 8300000, guid: f300c37eea76544489b0afa8a0364207, type: 3}
 --- !u!114 &114049353269109040
 MonoBehaviour:

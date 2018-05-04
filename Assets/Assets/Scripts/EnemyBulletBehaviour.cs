@@ -5,25 +5,20 @@ using UnityEngine;
 public class EnemyBulletBehaviour : MonoBehaviour
 {
 
-    // Use this for initialization
+
     void Start()
     {
-        Destroy(gameObject, 2.0f);
+        Destroy(gameObject, 2.0f); // destory the bullet after 2 seconds.
     }
 
     void OnCollisionEnter(Collision collision) //when the colliding with a collider
     {
 
-        if (collision.gameObject.tag == "Player") // if the raycast hits an object tagged enemy
+        if (collision.gameObject.tag == "Player") // if the bullet hits a game object tagged Player
         {
-            Debug.Log("HitPlayer");
-            Destroy(gameObject);
+            Destroy(gameObject); // destroy the bullet
         }
 
-        else
-        {
-            Destroy(gameObject, 1.0f);
-        }
 
     }
 }

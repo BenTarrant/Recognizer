@@ -6,16 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public float timeLeft = 120f;
-
-    public Text Timertext;
-
-    public GameObject StartBarriers;
-    public GameObject FloorBarrier;
-    public GameObject TeleportBarriers;
 
     private static GameManager instance = null;
-    public static GameManager GM
+    public static GameManager GM // enables other scripts to access singleton if necessary
 
 
     {
@@ -26,55 +19,18 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
 
-        if (instance != null && instance != this) 
+        if (instance != null && instance != this) //if this is a duplicate GM
         {
-            Destroy(this.gameObject);
-            return;
+            Destroy(this.gameObject); //destory the duplicate
+            return; // return to the start of function
 
         } 
         
         else
         {
-            instance = this;
+            instance = this; // set this to the instance of the singleton
         }
 
-        DontDestroyOnLoad(this.gameObject);
-    }
-    // Use this for initialization
-    void Start () {
-
-        timeLeft = 120.0f;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level01"))
-        {
-            timeLeft -= Time.deltaTime;
-
-            if (timeLeft >= 0)
-            {
-                Timertext.text = "Materialization:" + Mathf.Round(timeLeft);
-            }
-
-            if (Mathf.Round(timeLeft) == 90)
-            {
-                Destroy(StartBarriers);
-            }
-
-            if (Mathf.Round(timeLeft) == 60)
-            {
-                Destroy(FloorBarrier);
-            }
-
-            if (timeLeft <= 0)
-            {
-                Destroy(TeleportBarriers);
-                Timertext.text = ("");
-
-            }
-        }
-
+        DontDestroyOnLoad(this.gameObject); // don't destory this between scenes
     }
 }

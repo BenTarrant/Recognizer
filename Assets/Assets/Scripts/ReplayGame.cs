@@ -15,15 +15,14 @@ public class MainMenu : MonoBehaviour
     {
         collide = GetComponent<Collider>(); //retrieve the collider
         GetComponent<AudioSource>().clip = ReLaunchClip; // retrieve the audio clip in the audiosource
-        GetComponent<MenuPlayer>();
-        SetCursorState();
+        SetCursorState(); // run cursor state method
 
 
     }
 
-    void SetCursorState()
+    void SetCursorState() // cursor state method
     {
-        Cursor.lockState = CursorLockMode.None; // Stops cursor moving during play
+        Cursor.lockState = CursorLockMode.None; // releases cursor
     }
 
     void Update()
@@ -36,7 +35,6 @@ public class MainMenu : MonoBehaviour
 
             if (collide.Raycast(ray, out hit, 100.0F)) // if tyhe raycast hits the collider attached to this GO
             {
-                Debug.Log("Load Level");
                 StartCoroutine(ReLoadLevel()); // start the LoadLevel Coroutine
                 GetComponent<AudioSource>().Play(); // and play the audio clip
             }
@@ -51,7 +49,7 @@ public class MainMenu : MonoBehaviour
         transform.position = new Vector3(-100.55f, 2.2f, -600.7f);// Move the Unclicked title (Blue) out of shot
         ReplayClickedTitle.SetActive(true); // Set the Clicked title (Orange) GO to active - the illusion of changing colour
         yield return new WaitForSeconds(2.5f);// wait for 2.5 seconds
-        SceneManager.LoadScene("MenuScreen");
+        SceneManager.LoadScene("MenuScreen"); // load menu screen (to restart game sequence afresh)
 
     }
 }

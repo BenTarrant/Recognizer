@@ -2628,8 +2628,10 @@ MonoBehaviour:
   Health: 1
   Deresolution: {fileID: 1535501104761706, guid: 1cef784160180304da6e44d27cee15c4,
     type: 2}
+  Rifle: {fileID: 0}
   agent: {fileID: 195712069626142364}
   target: {fileID: 4013873050611448, guid: 8a1b6873bc9d9114e92499810a3ee6e0, type: 2}
+  EnemyHit: {fileID: 8300000, guid: 4f14fac6795245f488a5101066100a5b, type: 3}
   BulletPrefab: {fileID: 1377925345810600, guid: e4ffa5da96567ad4abf93faca7aea081,
     type: 2}
   BulletStart: {fileID: 4668203391599182}

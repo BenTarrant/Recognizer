@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3e223fb6d1e023f4084a9867e914e8fd
+timeCreated: 1525449383
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Brute: {fileID: 1428277126130918, guid: 20b7db95825b73f4890c04c00d99aae8, type: 2}
+  - Imp: {fileID: 1376960238291046, guid: 72a39c899d061624ab51399c79e81b56, type: 2}
+  - Zombie: {fileID: 1759476710923274, guid: 67f84a90d2dd7e943bd7d9acbe7a35a5, type: 2}
+  - Boss: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
