@@ -18,7 +18,7 @@ public abstract class EnemyEntity : MonoBehaviour
     public virtual void Start()
     {
         target = FindObjectOfType<PlayerController>().transform; //allows all iherited classes to define the player's transform as their target
-        AudioSource SourceAudio = gameObject.AddComponent<AudioSource>();
+        //AudioSource SourceAudio = gameObject.AddComponent<AudioSource>();
         GetComponent<AudioSource>();
         //SourceAudio.volume = 0.1f;
         //SourceAudio.priority = 1;

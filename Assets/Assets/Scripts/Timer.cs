@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Timer : MonoBehaviour
+public class DeresolutionTimer : MonoBehaviour
 {
-    public float timePassed = 0f; // reference for the amount of time left
+    public float timeLeft = 120f; // reference for the amount of time left
 
     public Text Timertext; // reference the UI text
 
@@ -18,26 +18,27 @@ public class Timer : MonoBehaviour
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level01")) // get the active scene and check if it's LevelO1
         {
-            timePassed += Time.deltaTime; //time left minus delta time
+            timeLeft -= Time.deltaTime; //time left minus delta time
 
-            if (timePassed >= 0) // if time left is greater or equal to 0
+            if (timeLeft >= 0) // if time left is greater or equal to 0
             {
-                Timertext.text = "Survived For: " + Mathf.Round(timePassed); // display the time left in referenced UI text
+                Timertext.text = "Materialization:" + Mathf.Round(timeLeft); // display the time left in referenced UI text
             }
 
-            if (Mathf.Round(timePassed) == 30) // when survived for 30 seconds
+            if (Mathf.Round(timeLeft) == 90) // when time left hits 90
             {
                 Destroy(StartBarriers); // destory the starting barriers
             }
 
-            if (Mathf.Round(timePassed) == 100) // when survived for 100 seconds
+            if (Mathf.Round(timeLeft) == 60) // when time left hits 60
             {
                 Destroy(FloorBarrier); // destory barriers to second floor
             }
 
-            if (timePassed == 150) //when survived for 150 seconds
+            if (timeLeft <= 0) // when time left goes below 0
             {
                 Destroy(TeleportBarriers); // destory the teleport barriers
+                Timertext.text = (""); // stop displaying the UI
 
             }
         }
