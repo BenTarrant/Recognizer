@@ -11,8 +11,7 @@ public class Timer : MonoBehaviour
     public Text BestTime; // reference for highscore in UI
 
     public GameObject StartBarriers; // reference the starting barriers
-    public GameObject FloorBarrier; // reference the barrier to the second floor
-    public GameObject TeleportBarriers; // reference the barriers around the teleport
+    public GameObject FinalSpawners;
 
     public static Timer instace; // a static variable for other scripts to access
     public int score = 0; // interger reference for score
@@ -25,6 +24,7 @@ public class Timer : MonoBehaviour
         instace = this; // set the static variable to this script
         highScore = PlayerPrefs.GetInt(highScoreKey);  //Get the highScore from player prefs if it is there, 0 otherwise.
         BestTime.text = "Best Time: " + (highScore); // set the best time text to read as the highest score
+        FinalSpawners.gameObject.SetActive(false); // ensure the final waves of spawners are not active
     }
 
     void Update()
@@ -47,15 +47,9 @@ public class Timer : MonoBehaviour
                 Destroy(StartBarriers); // destory the starting barriers
             }
 
-            if (Mathf.Round(timePassed) >= 100) // when survived for 100 seconds
+            if (Mathf.Round(timePassed) >= 200) // when survived for 200 seconds
             {
-                Destroy(FloorBarrier); // destory barriers to second floor
-            }
-
-            if (timePassed >= 150) //when survived for 150 seconds
-            {
-                Destroy(TeleportBarriers); // destory the teleport barriers
-
+                FinalSpawners.gameObject.SetActive (true); // set the final spawner waves to active (good luck)
             }
 
         }

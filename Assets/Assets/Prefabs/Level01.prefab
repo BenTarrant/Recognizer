@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4752776506221230}
-  - component: {fileID: 114704621055540648}
+  - component: {fileID: 114741021774011264}
   m_Layer: 0
   m_Name: Level01
   m_TagString: Untagged
@@ -3568,7 +3568,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846910073147366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -65, y: 4.5, z: -14.799999}
+  m_LocalPosition: {x: -75, y: 4.5, z: -14.799999}
   m_LocalScale: {x: 10, y: 8, z: 10}
   m_Children: []
   m_Father: {fileID: 4752776506221230}
@@ -11525,7 +11525,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114704621055540648
+--- !u!114 &114741021774011264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -11542,7 +11542,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294966271
+    m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -11552,7 +11552,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 6fbdb77415143eb428a9395e7a6157d5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: dd554711734ac2143883bc95769167f5, type: 2}
 --- !u!208 &208004722345565264
 NavMeshObstacle:
   m_ObjectHideFlags: 1
