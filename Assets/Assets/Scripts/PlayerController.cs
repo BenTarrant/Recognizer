@@ -33,8 +33,9 @@ public class PlayerController : MonoBehaviour
     private float RifleAmmo; // float for rifle ammo
     public Text AmmoText; // reference for the Ui displaying ammo
 
-    //Access EnemyEntity
+    //Access other scripts
     private EnemyEntity Enemy; // reference to the Enemy Controller script, specified in IDE
+    public Timer setScore;
 
     //Weapon Switching
     public GameObject[] weapons; // Creates an array of weapons
@@ -49,6 +50,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip HealthPickup; // audio for picking up health
     public AudioClip PlayerHit; // audio clip reference for player getting shot
 
+ 
+
     void Start()
     {
         Pickup = null;
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
         Healthtext.text = "Health: " + Mathf.Round(Health); // sets the initial starting heath from private float above and displays it in the referenced text component
         GetComponent<AudioSource>(); // get the audio source compnent to allow audio to be played
         Pickup = Resources.LoadAll("", typeof(GameObject)); // gather the prefabs in the resources folder and load them as gameobjects to be later used
+        setScore = GetComponent<Timer>();
     }
 
     void SetCursorState()
@@ -224,7 +228,7 @@ public class PlayerController : MonoBehaviour
                 //then run through to check what type of pick up it is
                 //this check means additional if statements can be added to implement new pick ups
 
-                if (collision.gameObject.name.Contains(Pickup[2].name)) // if it's the Rifle pickup in the array
+                if (collision.gameObject.name.Contains(Pickup[1].name)) // if it's the Rifle pickup in the array
                 {
                     RifleAmmo = RifleAmmo + 20; //add ammo to rifle
                     AmmoText.text = "Ammo: " + Mathf.Round(RifleAmmo); //update ammo text to reflect the add
@@ -236,14 +240,6 @@ public class PlayerController : MonoBehaviour
                     Sourceaudio.Play(); //play relevant audio clip
                     changeWeapon(2); // switch to the Rifle weapon (2 in array)
 
-                }
-
-                if (collision.gameObject.name.Contains(Pickup[1].name)) // if it's the Pistol pickup
-                {
-                    Destroy(collision.gameObject); // destroy the pickup
-                    Sourceaudio.clip = WeaponPickup; //define relevant audio clip
-                    Sourceaudio.Play(); //play relevant audio clip
-                    changeWeapon(1); // Switch to the Pistol 
                 }
 
                 if (collision.gameObject.name.Contains(Pickup[0].name)) // if its the health pickup
@@ -276,11 +272,10 @@ public class PlayerController : MonoBehaviour
 
     void OnParticleCollision(GameObject other) // when player collides with a particle system (the teleport)
     {
-
+        setScore.updateHighScore(); //only set the high score when the player enters the teleport
         SceneManager.LoadScene("CompleteScreen"); // finish the game
 
         //while this finishes the game currently, it can easily be expanded to allow for multiple levels accessed by reaching the teleport
-
     }
 }
 

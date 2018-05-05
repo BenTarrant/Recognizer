@@ -9,10 +9,13 @@ public class RestartGame : MonoBehaviour
 
     public Collider collide; // create a reference for the collider in the IDE
     public GameObject RetryClickedTitle; // create a reference for the clicked version of the title in the IDE
+    public AudioClip MenuClick; // audio clip reference for player getting shot
+    private AudioSource Sourceaudio; // reference for the audio source component
 
     void Start()
     {
         collide = GetComponent<Collider>(); //retrieve the collider
+        Sourceaudio = GetComponent<AudioSource>(); // retrieve the audio source
         SetCursorState(); // call the cursor state function
 
 
@@ -43,6 +46,8 @@ public class RestartGame : MonoBehaviour
 
     IEnumerator ReLoadLevel()
     {
+        Sourceaudio.clip = MenuClick; //define the relevant clip
+        Sourceaudio.Play(); // play the relevant audio clip
         transform.position = new Vector3(-100.55f, 2.2f, -600.7f);// Move the Unclicked title (Blue) out of shot
         RetryClickedTitle.SetActive(true); // Set the Clicked title (Orange) GO to active - the illusion of changing colour
         yield return new WaitForSeconds(0.5f);// wait for 2.5 seconds

@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenu : MonoBehaviour
+public class ReplayGame : MonoBehaviour
 {
 
     public Collider collide; // create a reference for the collider in the IDE
-    public AudioClip ReLaunchClip; // create reference for the audio clip in the IDE
+    public AudioClip MenuClick; // create reference for the audio clip in the IDE
     public GameObject ReplayClickedTitle; // create a reference for the clicked version of the title in the IDE
+    private AudioSource Sourceaudio; // reference for the audio source component
 
     void Start()
     {
         collide = GetComponent<Collider>(); //retrieve the collider
-        GetComponent<AudioSource>().clip = ReLaunchClip; // retrieve the audio clip in the audiosource
+        Sourceaudio = GetComponent<AudioSource>();
         SetCursorState(); // run cursor state method
 
 
@@ -35,8 +36,9 @@ public class MainMenu : MonoBehaviour
 
             if (collide.Raycast(ray, out hit, 100.0F)) // if tyhe raycast hits the collider attached to this GO
             {
+                Sourceaudio.clip = MenuClick; //define the relevant clip
+                Sourceaudio.Play(); // play the relevant audio clip
                 StartCoroutine(ReLoadLevel()); // start the LoadLevel Coroutine
-                GetComponent<AudioSource>().Play(); // and play the audio clip
             }
 
 

@@ -8,13 +8,12 @@ public class WaveSpawner : MonoBehaviour
 
 
     //Enemies prefabs
-
-    public GameObject [] Enemies;
+    public GameObject [] Enemies; // array of enemies to be spawned
 
 
     //spawn timings and amount
-    public int ToSpawn = 8;
-    public float fl_delay = 1;
+    public int ToSpawn = 8; // defined int of how many enemies from array will be spawned
+    public float fl_delay = 1; // spawner cooldown
     private float fl_timer;
 
     void Start()

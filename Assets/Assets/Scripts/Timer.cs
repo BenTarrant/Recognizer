@@ -3,45 +3,71 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class DeresolutionTimer : MonoBehaviour
+public class Timer : MonoBehaviour
 {
-    public float timeLeft = 120f; // reference for the amount of time left
+    public float timePassed = 0f; // reference for the amount of time left
 
     public Text Timertext; // reference the UI text
+    public Text BestTime;
 
     public GameObject StartBarriers; // reference the starting barriers
     public GameObject FloorBarrier; // reference the barrier to the second floor
     public GameObject TeleportBarriers; // reference the barriers around the teleport
 
 
+    public int score = 0; // interger reference for score
+    public int highScore = 0; // interger reference for highscore
+    string highScoreKey = "Best Time: "; // reference for string ket for player prefs
+
+
+    void Start()
+    {
+       
+        highScore = PlayerPrefs.GetInt(highScoreKey);  //Get the highScore from player prefs if it is there, 0 otherwise.
+        BestTime.text = "Best Time: " + (highScore); // set the best time text to read as the highest score
+    }
+
     void Update()
     {
+        
+        score = Mathf.RoundToInt(timePassed); //score int = time passed float but rounded to the nearest int
+        Timertext.text = score.ToString(); // set the timer passed text value to the score int string
+
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level01")) // get the active scene and check if it's LevelO1
         {
-            timeLeft -= Time.deltaTime; //time left minus delta time
+            timePassed += Time.deltaTime; //time left minus delta time
 
-            if (timeLeft >= 0) // if time left is greater or equal to 0
+            if (timePassed >= 0) // if time left is greater or equal to 0
             {
-                Timertext.text = "Materialization:" + Mathf.Round(timeLeft); // display the time left in referenced UI text
+                Timertext.text = "Survived For: " + Mathf.Round(timePassed); // display the time left in referenced UI text
             }
 
-            if (Mathf.Round(timeLeft) == 90) // when time left hits 90
+            if (Mathf.Round(timePassed) >= 30) // when survived for 30 seconds
             {
                 Destroy(StartBarriers); // destory the starting barriers
             }
 
-            if (Mathf.Round(timeLeft) == 60) // when time left hits 60
+            if (Mathf.Round(timePassed) >= 100) // when survived for 100 seconds
             {
                 Destroy(FloorBarrier); // destory barriers to second floor
             }
 
-            if (timeLeft <= 0) // when time left goes below 0
+            if (timePassed >= 150) //when survived for 150 seconds
             {
                 Destroy(TeleportBarriers); // destory the teleport barriers
-                Timertext.text = (""); // stop displaying the UI
 
             }
+
         }
         
+    }
+
+    public void updateHighScore() // update high score function (called by the player when they enter the teleport)
+    {
+        if (score > highScore) // if the score int is higher than the currently stored high score int
+        {
+            PlayerPrefs.SetInt(highScoreKey, score); // set the high score key as the current score
+            PlayerPrefs.Save(); // ensure the player prefs are saved to be retrieved on reload
+        }
     }
 }

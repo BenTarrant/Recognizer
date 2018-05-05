@@ -18,18 +18,15 @@ public abstract class EnemyEntity : MonoBehaviour
     public virtual void Start()
     {
         target = FindObjectOfType<PlayerController>().transform; //allows all iherited classes to define the player's transform as their target
-        //AudioSource SourceAudio = gameObject.AddComponent<AudioSource>();
-        GetComponent<AudioSource>();
-        //SourceAudio.volume = 0.1f;
-        //SourceAudio.priority = 1;
+        GetComponent<AudioSource>(); // fetch that audio source component
     }
 
     public virtual void HitByRay(int vDamage) // when the NPC registers a raycast
     {
         Health -= vDamage; // lose health equal to damage received
-        AudioSource.PlayClipAtPoint(EnemyHit, transform.position);
+        AudioSource.PlayClipAtPoint(EnemyHit, transform.position); // play the defined audio clip
 
-        if (Health == 0) // if an enemy drops to 0 health
+        if (Health <= 0) // if an enemy drops to 0 health
         {
             Instantiate(Deresolution, transform.position + (transform.up * 1), transform.rotation); //instatiate the deresolution protocol at game object location
             if ((gameObject.GetComponent("BruteEnemy") as BruteEnemy) != null) // if the enemy has the Brute Enemy component

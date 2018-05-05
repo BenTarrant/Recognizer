@@ -1923,6 +1923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collide: {fileID: 1507934887}
+  MenuClick: {fileID: 8300000, guid: 7e2b8c03f41ff8c40a583426928a506a, type: 3}
   ReplayClickedTitle: {fileID: 1974817389}
 --- !u!82 &1507934886
 AudioSource:

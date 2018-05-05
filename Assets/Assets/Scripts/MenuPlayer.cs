@@ -39,7 +39,7 @@ public class MenuPlayer : MonoBehaviour {
     IEnumerator LoadLevel()
     {
         
-        yield return new WaitForSeconds(1.0f);// wait for 2.5 seconds
+        yield return new WaitForSeconds(0.5f);// wait for 2.5 seconds
         SceneManager.LoadScene("Level01"); // load the scene title X
 
     }
