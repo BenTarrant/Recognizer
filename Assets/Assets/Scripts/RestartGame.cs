@@ -24,6 +24,7 @@ public class RestartGame : MonoBehaviour
     void SetCursorState()
     {
         Cursor.lockState = CursorLockMode.None; // unlocks the cursor so the player can click Retry
+        Cursor.visible = true;
     }
 
     void Update()

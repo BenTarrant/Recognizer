@@ -24,6 +24,7 @@ public class ReplayGame : MonoBehaviour
     void SetCursorState() // cursor state method
     {
         Cursor.lockState = CursorLockMode.None; // releases cursor
+        Cursor.visible = true;
     }
 
     void Update()

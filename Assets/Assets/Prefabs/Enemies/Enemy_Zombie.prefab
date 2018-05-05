@@ -2637,7 +2637,7 @@ MonoBehaviour:
   BulletStart: {fileID: 4668203391599182}
   BulletSpeed: 40
   fl_delay: 0
-  fl_cool_down: 0.8
+  fl_cool_down: 0.6
 --- !u!136 &136643884148985962
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2823,7 +2823,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 6
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

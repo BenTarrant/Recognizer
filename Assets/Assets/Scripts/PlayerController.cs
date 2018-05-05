@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     //Player Movement and Looking
     public float movementSpeed = 5.0f; // public reference to movement speed
-    public float mouseSensitivity = 5.0f;// public reference for mouse sensitivity
+    public float mouseSensitivity = 4.0f;// public reference for mouse sensitivity
     float verticalRotation = 0;
     public float upDownRange = 60.0f; // these are used to define the range the camera can be moved with the mouse on Y axis
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     //Access other scripts
     private EnemyEntity Enemy; // reference to the Enemy Controller script, specified in IDE
-    public Timer setScore;
+    //private Timer setScore;
 
     //Weapon Switching
     public GameObject[] weapons; // Creates an array of weapons
@@ -60,12 +60,13 @@ public class PlayerController : MonoBehaviour
         Healthtext.text = "Health: " + Mathf.Round(Health); // sets the initial starting heath from private float above and displays it in the referenced text component
         GetComponent<AudioSource>(); // get the audio source compnent to allow audio to be played
         Pickup = Resources.LoadAll("", typeof(GameObject)); // gather the prefabs in the resources folder and load them as gameobjects to be later used
-        setScore = GetComponent<Timer>();
+        //setScore = GetComponent<Timer>();
     }
 
     void SetCursorState()
     {
         Cursor.lockState = CursorLockMode.Locked; // Stops cursor moving during play
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -164,7 +165,6 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;//fire a raycast
         if (Physics.Raycast(FPScamera.transform.position, FPScamera.transform.forward, out hit, range))//if the raycast hits something within range
         {
-            Debug.Log(hit.transform.name); // print the name of collider the ray has hit
             Instantiate(ImpactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // instantiate attached impact particle effect with correct rotation based on normals of collider
 
             if (hit.transform.gameObject.tag == "Enemy") // if the raycast hits an object tagged enemy
@@ -272,8 +272,7 @@ public class PlayerController : MonoBehaviour
 
     void OnParticleCollision(GameObject other) // when player collides with a particle system (the teleport)
     {
-        setScore.updateHighScore(); //only set the high score when the player enters the teleport
-        SceneManager.LoadScene("CompleteScreen"); // finish the game
+      Timer.instace.UpdateHighScore(); //only set the high score when the player enters the teleport
 
         //while this finishes the game currently, it can easily be expanded to allow for multiple levels accessed by reaching the teleport
     }
