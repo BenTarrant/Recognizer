@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     void SetCursorState()
     {
         Cursor.lockState = CursorLockMode.Locked; // Stops cursor moving during play
-        Cursor.visible = false;
+        Cursor.visible = false; // sets the cursore to invisible in build
     }
 
     // Update is called once per frame
