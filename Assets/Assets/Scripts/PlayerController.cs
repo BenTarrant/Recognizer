@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     //Health
     public Text Healthtext; // reference for health UI
-    private float Health = 100000; // reference and sets the player's initial health
+    private float Health = 10; // reference and sets the player's initial health
     public AudioClip HealthPickup; // audio for picking up health
     public AudioClip PlayerHit; // audio clip reference for player getting shot
 

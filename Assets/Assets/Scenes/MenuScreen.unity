@@ -172,6 +172,11 @@ Prefab:
       propertyPath: Teleport
       value: 
       objectReference: {fileID: 1810102427}
+    - target: {fileID: 114856895117118546, guid: 42e62a7df352f424fae27be58eea9c08,
+        type: 2}
+      propertyPath: LaunchClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 83f8c0fdac3be6e43a02bb2dd09efe19, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42e62a7df352f424fae27be58eea9c08, type: 2}
   m_IsPrefabParent: 0
