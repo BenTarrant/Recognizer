@@ -2,9 +2,13 @@
 
 Controls:
 WASD: Forwards, Backwards and strafing
+
 Mouse movement: Looking (trackpad gameplay is not recommended)
+
 Left Mouse: Fire
+
 Alpha 1: Equip Pistol
+
 Alpha 2: Equip Rifle (if picked up)
 
 
@@ -17,9 +21,16 @@ Remember, your score is only saved if you manage to escape.
 To access the array of audio feedback Recognizer employs, it is recommended that you play with either headphones or the sound on.
 
 Green Shards = 5 points of Health
+
 Rifle Pickup = 20 rounds of ammunition for the rifle
+
 Pistol = infinite ammo but low damage
+
 Rifle = low ammo, high damage per second (Blue Enemies also drop rifles)
+
 Green Enemies = fast movement, low health, ranged
+
 Orange Enemies = mid movement, mid health, ranged
+
 Blue Enemies = high damage, low movement, high health, melee
+
