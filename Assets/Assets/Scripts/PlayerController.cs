@@ -46,21 +46,24 @@ public class PlayerController : MonoBehaviour
 
     //Health
     public Text Healthtext; // reference for health UI
-    private float Health = 10; // reference and sets the player's initial health
+    public float Health = 15; // reference and sets the player's initial health
     public AudioClip HealthPickup; // audio for picking up health
     public AudioClip PlayerHit; // audio clip reference for player getting shot
 
- 
+    //Stationary
+    //private bool Stationary;
+
+
 
     void Start()
     {
+        PauseMenu.GameIsPaused = false;
         Pickup = null;
         SetCursorState(); // Apply requested cursor state
         HasWeapon2 = false; //set so player doesn't have Weapon 2 (Rifle)
         Healthtext.text = "Health: " + Mathf.Round(Health); // sets the initial starting heath from private float above and displays it in the referenced text component
         GetComponent<AudioSource>(); // get the audio source compnent to allow audio to be played
         Pickup = Resources.LoadAll("", typeof(GameObject)); // gather the prefabs in the resources folder and load them as gameobjects to be later used
-        //setScore = GetComponent<Timer>();
     }
 
     void SetCursorState()
@@ -72,25 +75,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Camera Roatation
-        float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity; //set the mouse sensitivity on the X axis and rotate camera
-        transform.Rotate(0, rotLeftRight, 0);
-
-        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity; // set the mouse sensitivity on the Y axis and rotate camera
-        verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange); // clamp the rotation along the Y based on definied range
-        Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0); 
-
-        // causes mouse to move horizontal roatation based on mouse sensitivty float
-        //Could eventually be incorporated into a UI slider so player can edit
+        if (PauseMenu.GameIsPaused == false) // if the game isn't paused, the player can move
+        {
 
 
-        //Player Movement
-        float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed; //sets the speed the player moves forward/back
-        float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed; // sets the speed the player moves left/right
-        Vector3 speed = new Vector3(sideSpeed, 0, forwardSpeed); //creats new vector 3 based on directional speeds
-        speed = transform.rotation * speed;
-        CharacterController cc = GetComponent<CharacterController>(); // finds the chracter controller
-        cc.SimpleMove(speed); // uses the defined direction and defined speed to move the character controller attached to player
+            //Camera Roatation
+            float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity; //set the mouse sensitivity on the X axis and rotate camera
+            transform.Rotate(0, rotLeftRight, 0);
+
+            verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity; // set the mouse sensitivity on the Y axis and rotate camera
+            verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange); // clamp the rotation along the Y based on definied range
+            Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+
+            // causes mouse to move horizontal roatation based on mouse sensitivty float
+            //Could eventually be incorporated into a UI slider so player can edit
+
+
+            //Player Movement
+            float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed; //sets the speed the player moves forward/back
+            float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed; // sets the speed the player moves left/right
+            Vector3 speed = new Vector3(sideSpeed, 0, forwardSpeed); //creats new vector 3 based on directional speeds
+            speed = transform.rotation * speed;
+            CharacterController cc = GetComponent<CharacterController>(); // finds the chracter controller
+            cc.SimpleMove(speed); // uses the defined direction and defined speed to move the character controller attached to player
+        }
+
+
+        //if (!Input.GetKeyDown("up"))
+        //{
+        //    Debug.Log("Stationary");
+        //    StartCoroutine(StationaryDamage());
+        //}
 
         //Player Shooting
         if (Input.GetMouseButton(0) && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
@@ -98,8 +113,8 @@ public class PlayerController : MonoBehaviour
 
             //using button rather than button down allows fully automatic firing of the rifle which is far more appealing for players
 
-           Shoot(); // run shoot method
-           fl_delay = Time.time + fl_cool_down; //specifiy cooldown
+            Shoot(); // run shoot method
+            fl_delay = Time.time + fl_cool_down; //specifiy cooldown
 
             if (weapons[2].gameObject.activeSelf == true) // if weapon 2 is active (equipped)
             {
@@ -174,7 +189,7 @@ public class PlayerController : MonoBehaviour
 
                 if (weapons[2].gameObject.activeSelf == true) // if the rifle is equipped
                 {
-                    
+
                     Enemy.HitByRay(2);//run the function HitByRay in the script attached to the enemy dealing 2 damage
                     Sourceaudio.clip = EnemyHit; //define the relevant audio clip
                     Sourceaudio.Play(); // play the relevant audio clip
@@ -182,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
                 else
                 {
-                    
+
                     Enemy.HitByRay(1); //run the function HitByRay in the script attached to the enemy dealing 1 damage
                     Sourceaudio.clip = EnemyHit; //define the relevant audio clip
                     Sourceaudio.Play(); // play the relevant audio clip
@@ -230,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
                 if (collision.gameObject.name.Contains(Pickup[1].name)) // if it's the Rifle pickup in the array
                 {
-                    RifleAmmo = RifleAmmo + 20; //add ammo to rifle
+                    RifleAmmo = RifleAmmo + 30; //add ammo to rifle
                     AmmoText.text = "Ammo: " + Mathf.Round(RifleAmmo); //update ammo text to reflect the add
                     Destroy(collision.gameObject); // destroy the pickup
                     HasWeapon2 = true; // set the rifle boolean to true
@@ -272,9 +287,17 @@ public class PlayerController : MonoBehaviour
 
     void OnParticleCollision(GameObject other) // when player collides with a particle system (the teleport)
     {
-      Timer.instace.UpdateHighScore(); //only set the high score when the player enters the teleport
+        Timer.instace.UpdateHighScore(); //only set the high score when the player enters the teleport
 
         //while this finishes the game currently, it can easily be expanded to allow for multiple levels accessed by reaching the teleport
     }
+
+
+    //IEnumerator StationaryDamage()
+    //{
+    //        Debug.Log("StationaryDamage");
+    //        yield return new WaitForSeconds(2.5f);// wait for 2.5 seconds
+
+    //}
 }
 

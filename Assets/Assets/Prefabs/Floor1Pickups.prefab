@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 4297443359178912}
   - component: {fileID: 135759871157582114}
   - component: {fileID: 114821808499350658}
+  - component: {fileID: 108418636656711018}
   m_Layer: 0
   m_Name: Pickup_Weapon_Rifle
   m_TagString: Pickup
@@ -1191,6 +1192,42 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1358040378588964}
   m_Mesh: {fileID: 4300006, guid: 759595ca2b0bfed4b97a7e15e21b5cd0, type: 3}
+--- !u!108 &108418636656711018
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1793857640248832}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 0, g: 1, b: 0.95862055, a: 1}
+  m_Intensity: 1
+  m_Range: 2
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 1
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114089236003126118
 MonoBehaviour:
   m_ObjectHideFlags: 1
