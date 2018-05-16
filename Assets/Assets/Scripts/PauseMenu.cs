@@ -39,12 +39,13 @@ public class PauseMenu : MonoBehaviour {
     void LockCursorState()
     {
         Cursor.lockState = CursorLockMode.Locked; // releases the cursor
-        Cursor.visible = true; //makes the cursor visible
+        Cursor.visible = false; //makes the cursor visible
     }
 
     public void Resume()
     {
         PauseMenuUI.SetActive(false);
+        LockCursorState();
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -53,7 +54,7 @@ public class PauseMenu : MonoBehaviour {
     {
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        
+        LockCursorState();
         GameIsPaused = true;
     }
 
