@@ -2162,7 +2162,9 @@ MonoBehaviour:
   Health: 10
   Deresolution: {fileID: 1535501104761706, guid: 1cef784160180304da6e44d27cee15c4,
     type: 2}
-  Rifle: {fileID: 1966904524988168, guid: 67db9550e9f8eff4097f471734b6f145, type: 2}
+  Drops:
+  - {fileID: 1425062588681996, guid: 60db66e29050696458eb2f4d2be95f21, type: 2}
+  - {fileID: 1966904524988168, guid: 67db9550e9f8eff4097f471734b6f145, type: 2}
   agent: {fileID: 195764440346693868}
   target: {fileID: 0}
   EnemyHit: {fileID: 8300000, guid: 4f14fac6795245f488a5101066100a5b, type: 3}

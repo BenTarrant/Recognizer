@@ -102,12 +102,6 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        //if (!Input.GetKeyDown("up"))
-        //{
-        //    Debug.Log("Stationary");
-        //    StartCoroutine(StationaryDamage());
-        //}
-
         //Player Shooting
         if (Input.GetMouseButton(0) && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
         {
@@ -294,14 +288,6 @@ public class PlayerController : MonoBehaviour
 
         //while this finishes the game currently, it can easily be expanded to allow for multiple levels accessed by reaching the teleport
     }
-
-
-    //IEnumerator StationaryDamage()
-    //{
-    //        Debug.Log("StationaryDamage");
-    //        yield return new WaitForSeconds(2.5f);// wait for 2.5 seconds
-
-    //}
 
     IEnumerator SplatterEffect()
     {

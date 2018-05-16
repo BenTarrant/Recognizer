@@ -15,9 +15,9 @@ public class Timer : MonoBehaviour
     public GameObject Shortcut;
 
     public static Timer instace; // a static variable for other scripts to access
-    public int score = 0; // interger reference for score
+    public  int score = 0; // interger reference for score
     public int highScore = 0; // interger reference for highscore
-    string highScoreKey = "Best Time: "; // reference for string ket for player prefs
+    string highScoreKey = "Best Time: "; // reference for string kept for player prefs
 
 
     void Start()
