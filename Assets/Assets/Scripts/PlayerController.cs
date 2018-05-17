@@ -110,8 +110,6 @@ public class PlayerController : MonoBehaviour
         }
 
         //Player Shooting
-        print(Input.GetAxis("XboxR2"));
-
         if ( (Input.GetButton("Shoot") || Input.GetAxis("XboxR2") <-0.1f)  && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
         {
             //using button rather than button down allows fully automatic firing of the rifle which is far more appealing for players
