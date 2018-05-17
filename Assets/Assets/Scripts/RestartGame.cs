@@ -30,6 +30,8 @@ public class RestartGame : MonoBehaviour
     void Update()
 
     {
+        if (Input.GetAxis("XboxR2") < -0.1f)
+            StartCoroutine(ReLoadLevel());
         if (Input.GetMouseButtonDown(0)) // when the left mouse button is pressed
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //check the position of the raycast from that click

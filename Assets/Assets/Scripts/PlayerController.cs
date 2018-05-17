@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     //Player Movement and Looking
     public float movementSpeed = 5.0f; // public reference to movement speed
     public float mouseSensitivity = 4.0f;// public reference for mouse sensitivity
+    public float mouseVertSensitivityRed = 1.2f; // public reference for vertical mouse sensitivity
     float verticalRotation = 0;
     public float upDownRange = 60.0f; // these are used to define the range the camera can be moved with the mouse on Y axis
 
@@ -51,11 +52,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip PlayerHit; // audio clip reference for player getting shot
     public GameObject Splatter;
 
-    //Stationary
-    //private bool Stationary;
-
-
-
     void Start()
     {
         PauseMenu.GameIsPaused = false;
@@ -78,16 +74,28 @@ public class PlayerController : MonoBehaviour
     {
         if (PauseMenu.GameIsPaused == false) // if the game isn't paused, the player can move
         {
-
-
             //Camera Roatation
-            float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity; //set the mouse sensitivity on the X axis and rotate camera
-            transform.Rotate(0, rotLeftRight, 0);
+            if (Input.GetAxis("XboxX") >0.1f || Input.GetAxis("XboxX") <-0.1f)
+            {
+                float rotLeftRight = Input.GetAxis("XboxX") * mouseSensitivity; //set the mouse sensitivity on the X axis and rotate camera
+                transform.Rotate(0, rotLeftRight, 0);
+            }
 
-            verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity; // set the mouse sensitivity on the Y axis and rotate camera
+            else if (Input.GetAxis("Mouse X") >0.1f || Input.GetAxis("Mouse X") <-0.1f)
+            {
+                float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity; //set the mouse sensitivity on the X axis and rotate camera
+                transform.Rotate(0, rotLeftRight, 0);
+            }          
+
+            // // set the mouse sensitivity on the Y axis and rotate camera
+            if (Input.GetAxis("XboxY") > 0.1f || Input.GetAxis("XboxY") < -0.1f)
+                verticalRotation -= Input.GetAxis("XboxY") * (mouseSensitivity / mouseVertSensitivityRed);
+            else if (Input.GetAxis("Mouse Y") > 0.1f || Input.GetAxis("Mouse Y") < -0.1f)
+                verticalRotation -= Input.GetAxis("Mouse Y") * (mouseSensitivity / mouseVertSensitivityRed);
+
+
             verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange); // clamp the rotation along the Y based on definied range
             Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
-
             // causes mouse to move horizontal roatation based on mouse sensitivty float
             //Could eventually be incorporated into a UI slider so player can edit
 
@@ -101,11 +109,11 @@ public class PlayerController : MonoBehaviour
             cc.SimpleMove(speed); // uses the defined direction and defined speed to move the character controller attached to player
         }
 
-
         //Player Shooting
-        if (Input.GetMouseButton(0) && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
-        {
+        print(Input.GetAxis("XboxR2"));
 
+        if ( (Input.GetButton("Shoot") || Input.GetAxis("XboxR2") <-0.1f)  && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
+        {
             //using button rather than button down allows fully automatic firing of the rifle which is far more appealing for players
 
             Shoot(); // run shoot method
@@ -140,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
         //Player Change Weapons
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // When the number 1 key above the letter keys is pressed
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButton("Fire2")) // When the number 1 key above the letter keys is pressed
         {
             AmmoText.text = (""); //update the UI to not be visible (pistol has infinite ammo, no use confusing the player)
             changeWeapon(1); // change to Weapon 1
@@ -150,7 +158,7 @@ public class PlayerController : MonoBehaviour
             Sourceaudio.Play(); // play the relevant audio clip
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2)) // When the number 2 key above the letter keys is pressed
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButton("Fire3")) // When the number 2 key above the letter keys is pressed
         {
             if (HasWeapon2 == true) // check to see if Player has picked up Weapon 2 (Rifle)
             {
@@ -166,11 +174,8 @@ public class PlayerController : MonoBehaviour
 
     void Shoot() // shoot method
     {
-
         Sourceaudio.clip = Shot; //define the relevant audio clip
         Sourceaudio.Play(); // play the relevant audio clip
-
-
 
         RaycastHit hit;//fire a raycast
         if (Physics.Raycast(FPScamera.transform.position, FPScamera.transform.forward, out hit, range))//if the raycast hits something within range
@@ -197,10 +202,8 @@ public class PlayerController : MonoBehaviour
                     Sourceaudio.clip = EnemyHit; //define the relevant audio clip
                     Sourceaudio.Play(); // play the relevant audio clip
                 }
-
             }
         }
-
     }
 
     public void changeWeapon(int num) // function to change weapon
@@ -214,7 +217,6 @@ public class PlayerController : MonoBehaviour
                 weapons[i].gameObject.SetActive(false); // else, set it to false - an 'on off' scenario to determine which weapon is equipped. Can be expanded as far as the array is expanded in IDE
             // reference this process with changeWeapon(*desired weapon number*);
         }
-
     }
 
     //pickup functionality

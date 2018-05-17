@@ -30,6 +30,8 @@ public class ReplayGame : MonoBehaviour
     void Update()
 
     {
+        if (Input.GetAxis("XboxR2") <- 0.1f)
+            StartCoroutine(ReLoadLevel());
         if (Input.GetMouseButtonDown(0)) // when the left mouse button is pressed
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //check the position of the raycast from that click
@@ -37,8 +39,7 @@ public class ReplayGame : MonoBehaviour
 
             if (collide.Raycast(ray, out hit, 100.0F)) // if tyhe raycast hits the collider attached to this GO
             {
-                Sourceaudio.clip = MenuClick; //define the relevant clip
-                Sourceaudio.Play(); // play the relevant audio clip
+
                 StartCoroutine(ReLoadLevel()); // start the LoadLevel Coroutine
             }
 
@@ -49,6 +50,8 @@ public class ReplayGame : MonoBehaviour
 
     IEnumerator ReLoadLevel()
     {
+        Sourceaudio.clip = MenuClick; //define the relevant clip
+        Sourceaudio.Play(); // play the relevant audio clip
         transform.position = new Vector3(-100.55f, 2.2f, -600.7f);// Move the Unclicked title (Blue) out of shot
         ReplayClickedTitle.SetActive(true); // Set the Clicked title (Orange) GO to active - the illusion of changing colour
         yield return new WaitForSeconds(2.5f);// wait for 2.5 seconds
