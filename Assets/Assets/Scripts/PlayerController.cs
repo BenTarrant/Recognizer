@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public float Health = 15; // reference and sets the player's initial health
     public AudioClip HealthPickup; // audio for picking up health
     public AudioClip PlayerHit; // audio clip reference for player getting shot
+    public GameObject Splatter;
 
     //Stationary
     //private bool Stationary;
@@ -100,12 +101,6 @@ public class PlayerController : MonoBehaviour
             cc.SimpleMove(speed); // uses the defined direction and defined speed to move the character controller attached to player
         }
 
-
-        //if (!Input.GetKeyDown("up"))
-        //{
-        //    Debug.Log("Stationary");
-        //    StartCoroutine(StationaryDamage());
-        //}
 
         //Player Shooting
         if (Input.GetMouseButton(0) && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
@@ -277,6 +272,8 @@ public class PlayerController : MonoBehaviour
         Healthtext.text = "Health: " + Mathf.Round(Health); // update UI to reflect this
         Sourceaudio.clip = PlayerHit; //define relevant audio clip
         Sourceaudio.Play(); //play relevant audio clip
+        StartCoroutine(SplatterEffect());
+        //
 
         if (Health <= 0) // death
         {
@@ -292,12 +289,11 @@ public class PlayerController : MonoBehaviour
         //while this finishes the game currently, it can easily be expanded to allow for multiple levels accessed by reaching the teleport
     }
 
-
-    //IEnumerator StationaryDamage()
-    //{
-    //        Debug.Log("StationaryDamage");
-    //        yield return new WaitForSeconds(2.5f);// wait for 2.5 seconds
-
-    //}
+    IEnumerator SplatterEffect()
+    {
+        Splatter.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        Splatter.gameObject.SetActive(false);
+    }
 }
 

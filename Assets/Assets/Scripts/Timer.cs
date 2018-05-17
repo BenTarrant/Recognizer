@@ -12,11 +12,12 @@ public class Timer : MonoBehaviour
 
     public GameObject StartBarriers; // reference the starting barriers
     public GameObject FinalSpawners;
+    public GameObject Shortcut;
 
     public static Timer instace; // a static variable for other scripts to access
-    public int score = 0; // interger reference for score
+    public  int score = 0; // interger reference for score
     public int highScore = 0; // interger reference for highscore
-    string highScoreKey = "Best Time: "; // reference for string ket for player prefs
+    string highScoreKey = "Best Time: "; // reference for string kept for player prefs
 
 
     void Start()
@@ -47,9 +48,10 @@ public class Timer : MonoBehaviour
                 Destroy(StartBarriers); // destory the starting barriers
             }
 
-            if (Mathf.Round(timePassed) >= 200) // when survived for 200 seconds
+            if (Mathf.Round(timePassed) >= 150) // when survived for 200 seconds
             {
                 FinalSpawners.gameObject.SetActive (true); // set the final spawner waves to active (good luck)
+                Shortcut.gameObject.SetActive(false);
             }
 
         }
