@@ -4,10 +4,10 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Wireframe-ShadedUnlit
-  m_Shader: {fileID: 4800000, guid: 349737f389860b042946c40afa327524, type: 3}
+  m_Shader: {fileID: 4800000, guid: ada0db740bbb2470a9c2d50b619c3351, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -58,6 +58,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WireframeMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WireframeTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cull: 2
@@ -79,6 +87,17 @@ Material:
     - _WindQuality: 0
     - _WireSmoothness: 20
     - _WireThickness: 750
+    - _WireframeAA: 0
+    - _WireframeAlphaCutoff: 0.5
+    - _WireframeAlphaMode: 0
+    - _WireframeCull: 2
+    - _WireframeDoubleSided: 0
+    - _WireframeLighting: 0
+    - _WireframeSize: 1
+    - _WireframeTexAniSpeedX: 0
+    - _WireframeTexAniSpeedY: 0
+    - _WireframeUV: 0
+    - _WireframeVertexColor: 0
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -86,3 +105,4 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _WireColor: {r: 0, g: 1, b: 0.98823535, a: 1}
+    - _WireframeColor: {r: 1, g: 1, b: 1, a: 1}
