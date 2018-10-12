@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 public class PauseMenu : MonoBehaviour {
 
@@ -9,10 +12,11 @@ public class PauseMenu : MonoBehaviour {
     public GameObject PauseMenuUI;
 
 
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // if the esc button is pressed
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("XBStart")) // if the esc button is pressed
         {
             if (GameIsPaused)
             {
@@ -21,6 +25,7 @@ public class PauseMenu : MonoBehaviour {
             }
             else
             {
+                
                 Pause();
                 UnlockCursorState(); // run cursor state method
             }
