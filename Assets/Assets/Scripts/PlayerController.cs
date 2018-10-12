@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         Pickup = null;
         SetCursorState(); // Apply requested cursor state
         HasWeapon2 = false; //set so player doesn't have Weapon 2 (Rifle)
+        EnemyEntity.TotalKills = 0; // Resets the kill counter to zero
         Sensitivitytext.text = "Sensitivity: " + Mathf.Round(mouseSensitivity);
         Healthtext.text = "Health: " + Mathf.Round(Health); // sets the initial starting heath from private float above and displays it in the referenced text component
         GetComponent<AudioSource>(); // get the audio source compnent to allow audio to be played
@@ -299,6 +300,7 @@ public class PlayerController : MonoBehaviour
 
         if (Health <= 0) // death
         {
+            
             PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name); //get the current scene and set it to a string (to allow correct reloading)
             SceneManager.LoadScene("RestartScreen"); // Load restart screen
         }

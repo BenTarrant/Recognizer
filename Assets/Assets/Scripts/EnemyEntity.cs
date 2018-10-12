@@ -15,7 +15,8 @@ public abstract class EnemyEntity : MonoBehaviour
     private AudioSource SourceAudio; // reference for audio source component in IDE
     public AudioClip EnemyHit; // reference for audio clip of enemies getting hit
 
-    public static int TotalKills;
+    //Kill Counter
+    public static int TotalKills; // creates a static integer value for total number of kills for access
 
     // Use this for initialization
     public virtual void Start()
@@ -32,7 +33,7 @@ public abstract class EnemyEntity : MonoBehaviour
 
         if (Health <= 0) // if an enemy drops to 0 health
         {
-            TotalKills++;
+            TotalKills++; // add 1 to the number of kills
             Instantiate(Deresolution, transform.position + (transform.up * 1), transform.rotation); //instatiate the deresolution protocol at game object location
             if ((gameObject.GetComponent("BruteEnemy") as BruteEnemy) != null) // if the enemy has the Brute Enemy component
             {
