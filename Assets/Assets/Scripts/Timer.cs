@@ -48,7 +48,7 @@ public class Timer : MonoBehaviour
                 Destroy(StartBarriers); // destory the starting barriers
             }
 
-            if (Mathf.Round(timePassed) >= 180) // when survived for 180 seconds
+            if (Mathf.Round(timePassed) >= 120) // when survived for 120 seconds
             {
                 FinalSpawners.gameObject.SetActive (true); // set the final spawner waves to active (good luck)
                 Shortcut.gameObject.SetActive(false);

@@ -11,13 +11,14 @@ public class Load_Game : MonoBehaviour {
     public MenuPlayer menuPlayer; // reference for the custom Player character for the menu sequence
     public GameObject Teleport; // reference for the teleport in menu sequence
     public Canvas Canvas;
+    public GameObject Logo;
 
     void Start()
     {
         coll = GetComponent<Collider>(); //retrieve the collider
         GetComponent<AudioSource>().clip = LaunchClip; // retrieve the audio clip in the audiosource
         GetComponent<MenuPlayer>(); // retrive the menu player script information
-
+        Logo.gameObject.SetActive(true);
         menuPlayer.enabled = false; // set the menu player GO to false
         Teleport.gameObject.SetActive(false); // set the teleport Go to false
 
@@ -48,6 +49,7 @@ public class Load_Game : MonoBehaviour {
     IEnumerator LoadLevel()
     {
         Canvas.gameObject.SetActive(false);
+        Logo.gameObject.SetActive(false);
         GetComponent<AudioSource>().Play();
         transform.position = new Vector3(-100.55f, 2.2f, -600.7f);// Move the Unclicked title (Blue) out of shot
         ClickedTitle.SetActive(true); // Set the Clicked title (Orange) GO to active - the illusion of changing colour
