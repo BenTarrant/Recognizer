@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float mouseVertSensitivityRed = 1.2f; // public reference for vertical mouse sensitivity
     float verticalRotation = 0;
     public float upDownRange = 60.0f; // these are used to define the range the camera can be moved with the mouse on Y axis
+    public Text Sensitivitytext;
 
     //Shooting references
     public Camera FPScamera; //Reference to the camera attached to the player for raycasting
@@ -52,12 +53,14 @@ public class PlayerController : MonoBehaviour
     public AudioClip PlayerHit; // audio clip reference for player getting shot
     public GameObject Splatter;
 
+
     void Start()
     {
         PauseMenu.GameIsPaused = false;
         Pickup = null;
         SetCursorState(); // Apply requested cursor state
         HasWeapon2 = false; //set so player doesn't have Weapon 2 (Rifle)
+        Sensitivitytext.text = "Sensitivity: " + Mathf.Round(mouseSensitivity);
         Healthtext.text = "Health: " + Mathf.Round(Health); // sets the initial starting heath from private float above and displays it in the referenced text component
         GetComponent<AudioSource>(); // get the audio source compnent to allow audio to be played
         Pickup = Resources.LoadAll("", typeof(GameObject)); // gather the prefabs in the resources folder and load them as gameobjects to be later used
@@ -109,6 +112,25 @@ public class PlayerController : MonoBehaviour
             cc.SimpleMove(speed); // uses the defined direction and defined speed to move the character controller attached to player
         }
 
+
+        //Mouse/Look sensitivity modifiers
+
+        if  ((Input.GetButtonDown("Plus") || Input.GetButtonDown("XboxRB")))
+        {
+            mouseSensitivity += 1;
+            Sensitivitytext.text = "Sensitivity: " + Mathf.Round(mouseSensitivity);
+            Debug.Log("Plus key was pressed.");
+            
+        }
+
+        if ((Input.GetButtonDown("Minus") || Input.GetButtonDown("XboxLB")))
+        {
+            mouseSensitivity -= 1;
+            Sensitivitytext.text = "Sensitivity: " + Mathf.Round(mouseSensitivity);
+            Debug.Log("Minus key was pressed.");
+            
+        }
+
         //Player Shooting
         if ( (Input.GetButton("Shoot") || Input.GetAxis("XboxR2") <-0.1f)  && Time.time > fl_delay) // if the left mouse button is held down or clicked and the cooldown has passed
         {
@@ -146,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
         //Player Change Weapons
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButton("Fire2")) // When the number 1 key above the letter keys is pressed
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButtonDown("Fire2")) // When the number 1 key above the letter keys is pressed
         {
             AmmoText.text = (""); //update the UI to not be visible (pistol has infinite ammo, no use confusing the player)
             changeWeapon(1); // change to Weapon 1

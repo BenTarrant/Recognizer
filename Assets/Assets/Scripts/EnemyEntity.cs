@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class EnemyEntity : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public abstract class EnemyEntity : MonoBehaviour
     private AudioSource SourceAudio; // reference for audio source component in IDE
     public AudioClip EnemyHit; // reference for audio clip of enemies getting hit
 
+    public static int TotalKills;
+
     // Use this for initialization
     public virtual void Start()
     {
+
         target = FindObjectOfType<PlayerController>().transform; //allows all iherited classes to define the player's transform as their target
         GetComponent<AudioSource>(); // fetch that audio source component
     }
@@ -28,6 +32,7 @@ public abstract class EnemyEntity : MonoBehaviour
 
         if (Health <= 0) // if an enemy drops to 0 health
         {
+            TotalKills++;
             Instantiate(Deresolution, transform.position + (transform.up * 1), transform.rotation); //instatiate the deresolution protocol at game object location
             if ((gameObject.GetComponent("BruteEnemy") as BruteEnemy) != null) // if the enemy has the Brute Enemy component
             {

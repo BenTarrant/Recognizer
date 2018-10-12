@@ -43,12 +43,12 @@ public class Timer : MonoBehaviour
                 Timertext.text = "Survived For: " + Mathf.Round(timePassed); // display the time left in referenced UI text
             }
 
-            if (Mathf.Round(timePassed) >= 30) // when survived for 30 seconds
+            if (Mathf.Round(timePassed) >= 25) // when survived for 30 seconds
             {
                 Destroy(StartBarriers); // destory the starting barriers
             }
 
-            if (Mathf.Round(timePassed) >= 150) // when survived for 200 seconds
+            if (Mathf.Round(timePassed) >= 180) // when survived for 180 seconds
             {
                 FinalSpawners.gameObject.SetActive (true); // set the final spawner waves to active (good luck)
                 Shortcut.gameObject.SetActive(false);
