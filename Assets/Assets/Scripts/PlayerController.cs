@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             mouseSensitivity += 1;
             Sensitivitytext.text = "Sensitivity: " + Mathf.Round(mouseSensitivity);
-            Debug.Log("Plus key was pressed.");
+            
             
         }
 
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             mouseSensitivity -= 1;
             Sensitivitytext.text = "Sensitivity: " + Mathf.Round(mouseSensitivity);
-            Debug.Log("Minus key was pressed.");
+            
             
         }
 
