@@ -5521,7 +5521,7 @@ ReflectionProbe:
   m_Mode: 1
   m_RefreshMode: 1
   m_TimeSlicingMode: 0
-  m_Resolution: 512
+  m_Resolution: 64
   m_UpdateFrequency: 0
   m_BoxSize: {x: 42.564255, y: 9.648029, z: 48.928623}
   m_BoxOffset: {x: -1.2426224, y: -2.9594345, z: -2.270567}
@@ -6699,7 +6699,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4247752080924786, guid: 1cef784160180304da6e44d27cee15c4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -65.84
+      value: -70.7
       objectReference: {fileID: 0}
     - target: {fileID: 4247752080924786, guid: 1cef784160180304da6e44d27cee15c4, type: 2}
       propertyPath: m_LocalPosition.y
