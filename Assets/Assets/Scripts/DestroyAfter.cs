@@ -15,8 +15,11 @@ public class DestroyAfter : MonoBehaviour {
 
     private void Update()
     {
-        var bit = (gameObject); //set a refernece to the gameobject 
-        bit.GetComponentInChildren<Rigidbody>().velocity = transform.up * BitSpeed; //fetch the GO childrens rigidbodies and apply velocity in up vector multiplied by bitspeed float
+        //var bit = (gameObject); //set a refernece to the gameobject 
+        Vector3 randomDirection = new Vector3(Random.value, Random.value, Random.value);
+        transform.Rotate(randomDirection);
+        transform.position += randomDirection * BitSpeed;
+        //bit.GetComponentInChildren<Rigidbody>().velocity = transform.up * BitSpeed; //fetch the GO childrens rigidbodies and apply velocity in up vector multiplied by bitspeed float
     }
 
 

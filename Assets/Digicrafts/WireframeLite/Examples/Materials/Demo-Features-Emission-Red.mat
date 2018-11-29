@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Demo-Features-Emission-Red
-  m_Shader: {fileID: 4800000, guid: ada0db740bbb2470a9c2d50b619c3351, type: 3}
+  m_Shader: {fileID: 4800000, guid: 740ec68bb03ba4b7bb8e410abc7f3145, type: 3}
   m_ShaderKeywords: _WIREFRAMEDOUBLESIDED_ON _WIREFRAME_AA _WIREFRAME_ALPHA_NORMAL
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -35,14 +35,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Shininess: 0.078125
+    - _Shininess: 1
     - _WireframeAA: 1
     - _WireframeAlphaCutoff: 0.5
     - _WireframeAlphaMode: 0
     - _WireframeCull: 0
     - _WireframeDoubleSided: 1
     - _WireframeLighting: 0
-    - _WireframeSize: 1.97
+    - _WireframeSize: 2
     - _WireframeTexAniSpeedX: 0
     - _WireframeTexAniSpeedY: 0
     - _WireframeUV: 0
